@@ -14,6 +14,7 @@ public class DriveState implements RoverState
         rover = inRoverContext;
     }
 
+    @Override
     public String startDrive()
     {
         String feedback = "Rover is already moving";
@@ -26,6 +27,7 @@ public class DriveState implements RoverState
         return feedback;
     }
 
+    @Override
     public String stopDrive()
     {
         String feedback = "Rover stopped moving";
