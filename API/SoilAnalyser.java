@@ -1,3 +1,5 @@
+package Assignment2.API;
+
 public class SoilAnalyser
 {
     /**

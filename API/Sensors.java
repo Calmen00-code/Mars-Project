@@ -1,3 +1,5 @@
+package Assignment2.API;
+
 public class Sensors
 {
     /** Performs a temperature reading and returns the result in °C. */
