@@ -5,6 +5,6 @@
 
 public interface RoverState
 {
-    public void startDrive();    
-    public void stopDrive();
+    public String startDrive();    
+    public String stopDrive();
 }
