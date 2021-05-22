@@ -1,0 +1,34 @@
+States
+------
+> "D" - Drive
+> "T" - Turn
+> "P" - Photo (Taking Photo)
+> "E" - Report Environment Status
+> "S" - Perform soil chemistry analysis
+> Idle
+> "!" - Return invalid message
+
+
+
+States Description
+------------------
+
+1. "S" is invalid when:
+> Driving
+> Already Performing Soil Analysis
+
+
+2. "D" and "T" are invalid when:
+> Rover in "S" states (Soil Analysis)
+
+
+3. Subsequent command can override prev one
+> If "D" was given while rover is ALREADY Driving
+> Then Rover should move towards the new distance given
+
+
+4. "T" is valid ONLY when:
+> Stop (Idle)
+> Driving "D"
+
+5. "P" and "E" ALWAYS VALID

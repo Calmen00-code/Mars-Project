@@ -1,0 +1,624 @@
+
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="utf-8" />
+                <title>Assignment 2</title>
+                <style>@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&family=Merriweather+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@500&family=Merriweather&family=Merriweather+Sans&display=swap');
+
+@media screen {
+    html { background: #404040; }
+    body {
+        background: 
+    }
+}
+
+html {
+    font-family: 'Merriweather', serif;
+    line-height: 1.8em;
+    background: #404040;
+}
+
+body {
+    background: white;
+    max-width: 50em;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 4em;
+
+    counter-reset: section;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Merriweather Sans', sans-serif;
+}
+
+h2, h3, h4, h5, h6 {
+    margin-top: 1.5em;
+}
+
+h2:not(.notnumbered) {
+    counter-reset: subsection;
+    counter-increment: section;
+}
+
+h2:not(.notnumbered)::before {
+    content: counter(section);
+    margin-right: 1em;
+}
+
+h3:not(.notnumbered) {
+    counter-reset: subsubsection;
+    counter-increment: subsection;
+}
+
+h3:not(.notnumbered)::before {
+    content: counter(section) "." counter(subsection);
+    margin-right: 1em;
+}
+
+h4:not(.notnumbered) {
+    counter-increment: subsubsection;
+}
+
+h4:not(.notnumbered)::before {
+    content: counter(section) "." counter(subsection) "." counter(subsubsection);
+    margin-right: 1em;
+}
+
+
+/* Code */
+
+pre {
+    line-height: 1.7em;    
+}
+
+code {
+    font-family: 'Inconsolata', monospace;
+}
+
+code .c1, code .cm { color: #c06000; } /* comments */
+code .k, code .kd, code .kt { color: blue; }    /* keywords */
+code .o, code .p   { color: red; }     /* symbols */
+code .s            { color: green; }   /* string literals */
+code .mi, code .mf, 
+code .mh, code .mb { color: #008080; } /* number literals */
+
+
+/* Boxes */
+
+.admonition {
+    border-radius: 5px;
+    border: 1px solid #606060;
+    padding: 0 1em;
+    margin: 1ex 0;
+}
+
+.admonition-title {
+    font-weight: bold;
+    font-family: 'Merriweather Sans', sans-serif;
+}
+
+.admonition.note {
+    border: 1px solid #0060c0;
+    background: #c0d8ff;
+}
+
+.admonition.warning {
+    border: 1px solid #c03030;
+    background: #ffc0c0;
+}
+
+
+/* Lists */
+
+ul > li::marker {
+    color: #0080ff;
+    content: '\25A0\00A0';
+}
+
+ul ul > li::marker {
+    color: #80c0ff;
+    content: '\25B8\00A0';
+}
+
+ol > li::marker {
+    color: #ff6000;
+    font-weight: bold;
+}
+
+li {
+    margin-top: 0.5em;
+    padding-left: 0.5em;
+}
+
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    border-bottom: 1px solid black;
+}
+
+table thead tr {
+    background-color: #ffc080;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+td, th {
+    padding: 0.5em 1em;
+    text-align: left;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: white;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #fff0e0;
+}
+
+
+/* Experimental */
+/* p::after, li::after, h1::after, h2::after, h3::after, h4::after, h5::after, h6::after { */
+/*     position: absolute; */
+/*     content: "12345678"; */
+/*     color: #fefefe; */
+/* } */
+</style>
+            <style> body { background: url("data:image/svg+xml;base64,PHN2ZyBiYXNlUHJvZmlsZT0idGlueSIgdmVyc2lvbj0iMS4yIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgICAgICAgICAgICAgICB3aWR0aD0iMjgwIiBoZWlnaHQ9IjYwIj4KICAgICAgICAgICAgICAgIDx0ZXh0IHg9IjAiIHk9IjUwIiBzdHlsZT0iZm9udDogYm9sZCA2MHB4IHNhbnMtc2VyaWY7IGZpbGw6ICNmZWZlZmU7Ij4yMDA3MjE0NDwvdGV4dD4KICAgICAgICAgICAgPC9zdmc+") white; } .c { user-select: none; color: #fefefe; background: white; border: 5px solid #fefefe; position: fixed; left: 50%; right: 50%; width: 300px; margin-left: -150px; text-align: center; z-index: 1; padding: 0em; font: bold 60px sans-serif; } .d { position: relative; z-index: 2; } .f { user-select: none; color: #fefefe; background: white; position: absolute; transform-origin: top left; transform: rotate(90deg); font: bold 50px sans-serif; } .j { position: absolute; left: 10000px; color: white; color: #ffffff00; font-size: 1px; z-index: -1; } </style><script> window.onload = function() { const colours = ["#181800","#181800","#000018","#180000","#000018","#000018","#000018","#000018","#001800","#181800","#000018","#180000","#000018","#001800","#001800","#000018","#001800","#000018"]; let i = 0; for(const element of document.getElementsByClassName('h')) { if(window.getComputedStyle(element)['color'] === 'rgb(0, 0, 0)') { element.style.color = colours[i]; i = (i + 1) % colours.length; } } }; </script></head>
+            <body> <div> <div class="c" style="top: 10px;" aria-hidden="true"><span>&#0050;</span>&#8288;<span>&#0048;</span>&#8288;<span>&#0048;</span>&#8288;<span>&#0055;</span>&#8288;<span>&#0050;</span>&#8288;<span>&#0049;</span>&#8288;<span>&#0052;</span>&#8288;<span>&#0052;</span></div> <div class="c" style="bottom: 10px;" aria-hidden="true"><span>&#0050;</span>&#8288;<span>&#0048;</span>&#8288;<span>&#0048;</span>&#8288;<span>&#0055;</span>&#8288;<span>&#0050;</span>&#8288;<span>&#0049;</span>&#8288;<span>&#0052;</span>&#8288;<span>&#0052;</span></div> </div> <div class="d"> <p style="color: red; text-align: center;"><span class="h">Please</span> do  <span class="h">not</span> <span class="h">share</span> <span class="h">this</span>   <span class="h">file</span>.  It  <span class="h">has</span>  <span class="h">been</span>  <span class="h">fingerprinted</span> <span class="h">with</span>  <span class="h">your</span> ID (<span class="h">20072144</span>).<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+                <div><div class="f" aria-hidden="true"><span>&#0050;</span>&#8288;<span>&#0048;</span>&#8288;<span>&#0048;</span>&#8288;<span>&#0055;</span>&#8288;<span>&#0050;</span>&#8288;<span>&#0049;</span>&#8288;<span>&#0052;</span>&#8288;<span>&#0052;</span></div></div><h1>Assignment   2</h1>
+                <div class="admonition preamble">
+<p><strong><span class="h">Object</span>  <span class="h">Oriented</span>  <span class="h">Software</span>  <span class="h">Engineering</span></strong>  (<span class="h">COMP2003</span>/<span class="h">6005</span>)<br />
+<span class="h">Semester</span> 1,  <span class="h">2021</span><span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<p><strong><span class="h">Due</span>:</strong> <span class="h">Thursday</span> 3   <span class="h">June</span>,  23:59<br />
+<strong><span class="h">Weight</span>:</strong>  45%  of  <span class="h">the</span> <span class="h">unit</span>  <span class="h">mark</span><span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+</div>
+<!-- This assignment will cover all topics in the unit, though with the main focus on those not otherwise covered in Assignment 1. -->
+
+<div><div class="f" aria-hidden="true"><span>&#0050;</span>&#8288;<span>&#0048;</span>&#8288;<span>&#0048;</span>&#8288;<span>&#0055;</span>&#8288;<span>&#0050;</span>&#8288;<span>&#0049;</span>&#8288;<span>&#0052;</span>&#8288;<span>&#0052;</span></div></div><h2>Your Task</h2>
+<p><span class="h">Design</span> <span class="h">and</span>   <span class="h">implement</span>  <span class="h">the</span>  <span class="h">system</span>  <span class="h">described</span>  <span class="h">below</span> <span class="h">under</span>  <a href="#problem_description"><span class="h">Problem</span> <span class="h">Description</span></a>. <span class="h">Specifically</span>:<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<ul>
+<li>
+<p><span class="h">Use</span>   <span class="h">either</span>  <span class="h">Java</span>,  C#,  C++  or <span class="h">Python</span>  to <span class="h">implement</span> <span class="h">the</span>   <span class="h">system</span>  <span class="h">described</span>.  <span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<ul>
+<li><span class="h">Your</span>  <span class="h">code</span>  <span class="h">should</span> be  of <span class="h">high</span> <span class="h">quality</span>,   <span class="h">with</span>  <span class="h">consistent</span>  <span class="h">formatting</span>  <span class="h">and</span>  <span class="h">meaningful</span> <span class="h">commenting</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>If  <span class="h">using</span> <span class="h">Java</span>, it   is  <span class="h">highly</span>  <span class="h">recommended</span>  <span class="h">that</span>  <span class="h">you</span> <span class="h">use</span>  <span class="h">Gradle</span> or <span class="h">Ant</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>If   <span class="h">using</span>  <span class="h">Python</span>,  <span class="h">use</span>  <a href="https://docs.python.org/3/library/typing.html"><span class="h">type</span>  <span class="h">hinting</span></a> <span class="h">for</span>  <span class="h">all</span> <span class="h">method</span>/<span class="h">function</span> <span class="h">parameters</span>   <span class="h">and</span>  <span class="h">return</span>  <span class="h">types</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>If  <span class="h">using</span>  C++, be  <span class="h">sure</span> <span class="h">you</span>&rsquo;ve <span class="h">understood</span>   <span class="h">the</span>  <a href="#base64"><span class="h">Base64</span></a>  <span class="h">caveat</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+</ul>
+<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>
+<p><span class="h">Make</span>  <span class="h">good</span>  <span class="h">use</span> of  <span class="h">polymorphism</span>. <span class="h">Specifically</span>, <span class="h">your</span>   <span class="h">design</span>  <span class="h">should</span>  <span class="h">include</span>  <em><span class="h">two</span>  <span class="h">distinct</span> <span class="h">inheritance</span>  <span class="h">hierarchies</span></em> <span class="h">such</span> <span class="h">that</span>:<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<ul>
+<li><span class="h">They</span>   <span class="h">use</span>  <span class="h">polymorphism</span>  to  <span class="h">help</span>  <span class="h">create</span> <span class="h">loose</span>  <span class="h">coupling</span> (<span class="h">and</span>/or <span class="h">extensibility</span>).<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li><span class="h">They</span>   <span class="h">address</span>  <span class="h">the</span>  <span class="h">actual</span>  <span class="h">requirements</span>  of <span class="h">the</span>  <span class="h">system</span> (i.e., <span class="h">they</span>&rsquo;re   <span class="h">part</span>  of  <span class="h">the</span>  <span class="h">solution</span>  to <span class="h">the</span>  <span class="h">problem</span> <span class="h">description</span>, <span class="h">not</span>   <span class="h">just</span>  <span class="h">added</span>  on).<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li><span class="h">They</span>  <span class="h">are</span>  <span class="h">substantially</span> <span class="h">different</span>  <span class="h">from</span> <span class="h">one</span> <span class="h">another</span>   (<span class="h">not</span>  <span class="h">just</span>  <span class="h">repetitions</span>  of  a <span class="h">single</span>  <span class="h">idea</span> <span class="h">applied</span> in   <span class="h">slightly</span>  <span class="h">different</span>  <span class="h">places</span>).<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+</ul>
+<p><span class="h">You</span>  <span class="h">are</span>  <span class="h">encouraged</span> to  <span class="h">consider</span> <span class="h">the</span> <span class="h">use</span>   of  <span class="h">the</span>  <span class="h">Observer</span>  <span class="h">Pattern</span>  <span class="h">and</span> <span class="h">State</span>  <span class="h">Pattern</span> <span class="h">for</span> <span class="h">these</span>   <span class="h">purposes</span>,  <span class="h">but</span>  <span class="h">you</span>  <span class="h">are</span>  <span class="h">not</span> <span class="h">limited</span>  to <span class="h">these</span> <span class="h">choices</span>   (<span class="h">and</span>  <span class="h">there</span>  <span class="h">are</span>  <span class="h">many</span>  <span class="h">possible</span> <span class="h">solutions</span>  <span class="h">even</span> <span class="h">using</span> <span class="h">only</span>   <span class="h">these</span>  <span class="h">patterns</span>).<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>
+<p><span class="h">Further</span>,  <span class="h">with</span>  <span class="h">respect</span>  to <span class="h">your</span>  <span class="h">design</span>:<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<ul>
+<li><span class="h">Ensure</span> <span class="h">sensible</span> <span class="h">division</span>   of  <span class="h">responsibilities</span>,  <span class="h">including</span>  a  <span class="h">sensible</span> <span class="h">use</span>  of <span class="h">packages</span> or   <span class="h">namespaces</span>.  (<span class="h">MVC</span>  is  <span class="h">not</span>  <span class="h">required</span>, <span class="h">and</span>  <span class="h">may</span> <span class="h">not</span> be   a  <span class="h">good</span>  <span class="h">choice</span>  <span class="h">for</span>  <span class="h">this</span> <span class="h">problem</span>.)<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li><span class="h">Implement</span>  <span class="h">dependency</span> <span class="h">injection</span>, <span class="h">and</span>   <em><span class="h">avoid</span></em>  <span class="h">using</span>  <span class="h">Singletons</span>.  (<span class="h">You</span>  <span class="h">may</span> or  <span class="h">may</span> <span class="h">not</span> <span class="h">decide</span>   <span class="h">that</span>  a  <span class="h">factory</span>  is  <span class="h">necessary</span>; <span class="h">this</span>  is up to   <span class="h">you</span>.)<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li><span class="h">Perform</span>  <span class="h">appropriate</span>  <span class="h">error</span>  <span class="h">handling</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+</ul>
+<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+</ul>
+<!--* In your design, use (a) the Strategy Pattern and/or Template Method Pattern (one or both), and (b) the Composite Pattern.
+
+    * You may _also_ use other patterns if you wish (whether or not they are described in the unit), but that is purely optional.-->
+
+<p><strong><span class="h">The</span>  <span class="h">following</span> <span class="h">requirements</span>  <span class="h">are</span> <span class="h">the</span> <span class="h">same</span>   as  <span class="h">for</span>  <span class="h">Assignment</span>  1:</strong><span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<ul>
+<li>
+<p><span class="h">Provide</span>  a <span class="h">UML</span>  <span class="h">class</span> <span class="h">diagram</span> <span class="h">giving</span>   a  <span class="h">structural</span>  <span class="h">overview</span>  of  <span class="h">your</span> <span class="h">design</span>.  <span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<ul>
+<li><span class="h">Your</span> <span class="h">UML</span> <span class="h">must</span>   <span class="h">accurately</span>  <span class="h">represent</span>  <span class="h">your</span>  <span class="h">design</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li><span class="h">Use</span>  a <span class="h">proper</span>  <span class="h">tool</span>; e.g., <a href="https://www.umlet.com/"><span class="h">Umlet</span></a>,   <a href="https://draw.io"><span class="h">draw</span>.io</a>,  <a href="https://plantuml.com"><span class="h">PlantUML</span></a>  or  <span class="h">others</span>.  <span class="h">Avoid</span> <span class="h">tools</span>  <span class="h">that</span> <span class="h">have</span> no   <span class="h">explicit</span>  <span class="h">support</span>  <span class="h">for</span>  <span class="h">UML</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li><span class="h">Make</span>  <span class="h">the</span> <span class="h">diagram</span>  <span class="h">layout</span> as <span class="h">neat</span>   <span class="h">and</span>  <span class="h">logical</span>  as  <span class="h">practical</span>.  <span class="h">Minimise</span> <span class="h">crossing</span>  <span class="h">lines</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>If in <span class="h">doubt</span>   as  to  <span class="h">whether</span>  or  <span class="h">not</span> to  <span class="h">represent</span> <span class="h">certain</span> <span class="h">things</span>   on  <span class="h">the</span>  <span class="h">diagram</span>,  <span class="h">err</span>  on <span class="h">the</span>  <span class="h">side</span> of <span class="h">more</span>   <span class="h">detail</span>.  <span class="h">But</span>  it  is  <span class="h">generally</span> <span class="h">unnecessary</span>  to <span class="h">show</span> <span class="h">constructors</span>   <span class="h">and</span>  (in  <span class="h">most</span>  <span class="h">cases</span>)  <span class="h">usage</span> <span class="h">dependencies</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+</ul>
+<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>
+<p><span class="h">Provide</span>  a <code><span class="h">README</span>.<span class="h">txt</span></code> (or   <code><span class="h">README</span>.md</code>)  <span class="h">that</span>  <span class="h">briefly</span>  <span class="h">explains</span>  <span class="h">how</span> to  <span class="h">compile</span> <span class="h">and</span> <span class="h">run</span>   <span class="h">your</span>  <span class="h">code</span>,  if  <span class="h">there</span>  <span class="h">are</span> <span class="h">any</span>  <span class="h">facets</span> of <span class="h">this</span>   <span class="h">that</span>  <span class="h">the</span>  <span class="h">marker</span>  <span class="h">needs</span>  to be  <span class="h">aware</span> of.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>
+<p><span class="h">Provide</span> a   <span class="h">response</span>  to  <span class="h">each</span>  of  <span class="h">the</span> <a href="#marking_criteria"><span class="h">marking</span>  <span class="h">criteria</span></a>. <span class="h">Record</span> <span class="h">this</span>   in  a  <span class="h">file</span>  <span class="h">called</span>  <code><span class="h">criteria</span>.<span class="h">txt</span></code> (or  <code><span class="h">criteria</span>.md</code>).<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+</ul>
+<div><div class="f" aria-hidden="true"><span>&#0050;</span>&#8288;<span>&#0048;</span>&#8288;<span>&#0048;</span>&#8288;<span>&#0055;</span>&#8288;<span>&#0050;</span>&#8288;<span>&#0049;</span>&#8288;<span>&#0052;</span>&#8288;<span>&#0052;</span></div></div><h2>Submission</h2>
+<p><span class="h">Submit</span> <span class="h">all</span> of   <span class="h">the</span>  <span class="h">above</span>,  <span class="h">plus</span>  a  <span class="h">signed</span> <span class="h">declaration</span>  of <span class="h">originality</span>, to   <span class="h">the</span>  <span class="h">appropriate</span>  <span class="h">area</span>  on  <span class="h">Blackboard</span>. <span class="h">Include</span>  <span class="h">everything</span> in a   <span class="h">single</span>  .<span class="h">zip</span>/.<span class="h">tar</span>.gz  <span class="h">file</span>  (<em><span class="h">please</span>  <span class="h">avoid</span></em> .<span class="h">rar</span>,  .<span class="h">zipx</span> or .7z).   <span class="h">You</span>  do  <span class="h">not</span>  <span class="h">need</span>  to <span class="h">include</span>  <span class="h">any</span> <span class="h">compiled</span> <span class="h">code</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<p><span class="h">You</span>   <span class="h">must</span>  <span class="h">verify</span>  <span class="h">that</span>  <span class="h">your</span>  <span class="h">submission</span> is  <span class="h">correct</span> <span class="h">and</span> <span class="h">not</span>   <span class="h">corrupted</span>.  <span class="h">Once</span>  <span class="h">you</span>  <span class="h">have</span>  <span class="h">submitted</span>, <span class="h">please</span>  <span class="h">download</span> <span class="h">your</span> <span class="h">own</span>   <span class="h">submission</span>  <span class="h">and</span>  <span class="h">thoroughly</span>  <span class="h">check</span>  <span class="h">that</span> it  is <span class="h">intact</span>. <span class="h">You</span>   <span class="h">may</span>  <span class="h">make</span>  <span class="h">multiple</span>  <span class="h">submissions</span>.  <span class="h">Only</span> <span class="h">your</span>  <span class="h">last</span> <span class="h">one</span> <span class="h">will</span>   be  <span class="h">marked</span>.  <span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<div><div class="f" aria-hidden="true"><span>&#0050;</span>&#8288;<span>&#0048;</span>&#8288;<span>&#0048;</span>&#8288;<span>&#0055;</span>&#8288;<span>&#0050;</span>&#8288;<span>&#0049;</span>&#8288;<span>&#0052;</span>&#8288;<span>&#0052;</span></div></div><h2 id="marking_criteria">Marking  Criteria</h2>
+<p><span class="h">The</span>  <span class="h">assignment</span> <span class="h">will</span>  be <span class="h">marked</span> <span class="h">out</span>   of  30.  <span class="h">There</span>  <span class="h">are</span>  <span class="h">six</span> <span class="h">core</span>  <span class="h">marking</span> <span class="h">criteria</span> <span class="h">and</span>   an  <span class="h">additional</span>  <span class="h">bonus</span>,  <span class="h">each</span>  <span class="h">worth</span> 5  <span class="h">marks</span>:<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<ol>
+<li>
+<p><span class="h">Clear</span> <span class="h">and</span> <span class="h">distinct</span>   <span class="h">package</span>/<span class="h">class</span>/<span class="h">interface</span>/<span class="h">method</span>  <span class="h">responsibilities</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>
+<p><span class="h">Appropriate</span>  <span class="h">error</span>  <span class="h">handling</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>
+<p><span class="h">Implementation</span>  of <span class="h">dependency</span>  <span class="h">injection</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>
+<p><span class="h">Use</span> of <span class="h">polymorphism</span>   #1<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>
+<p><span class="h">Use</span>  of  <span class="h">polymorphism</span>  #2<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>
+<p><span class="h">Clear</span>  <span class="h">and</span> <span class="h">correct</span>  <span class="h">UML</span><span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>
+<p><span class="h">Bonus</span>: <span class="h">meaningful</span> <span class="h">use</span>   of  <span class="h">generics</span>  (in  <span class="h">the</span>  <span class="h">sense</span> of  <span class="h">creating</span> <span class="h">your</span> <span class="h">own</span>   <span class="h">class</span>/<span class="h">interface</span>  <span class="h">with</span>  <span class="h">generic</span>  <span class="h">type</span>  <span class="h">parameter</span>(s), <span class="h">such</span>  <span class="h">that</span> it <span class="h">contributes</span>   to  <span class="h">code</span>  <span class="h">reuse</span>).<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+</ol>
+<!-- Polymorphism
+
+    Inheritance
+    Overridden methods
+    References to interface/superclass
+    Polymorphic call
+
+    Polymorphism has to address a requirement that is listed on the spec.
+
+    Distinctly different uses of polymorphism.
+
+    Purpose:
+    * decoupling
+    * extensibility
+
+
+
+-->
+
+<div><div class="f" aria-hidden="true"><span>&#0050;</span>&#8288;<span>&#0048;</span>&#8288;<span>&#0048;</span>&#8288;<span>&#0055;</span>&#8288;<span>&#0050;</span>&#8288;<span>&#0049;</span>&#8288;<span>&#0052;</span>&#8288;<span>&#0052;</span></div></div><h3>Does  the  program run  correctly?</h3>
+<p><span class="h">This</span> <span class="h">isn</span>&rsquo;t <span class="h">strictly</span>   <span class="h">one</span>  of  <span class="h">the</span>  <span class="h">criteria</span>,  <span class="h">but</span> <span class="h">rather</span>  a <span class="h">cross</span>-<span class="h">cutting</span> <span class="h">concern</span>   <span class="h">that</span>  <span class="h">affects</span>  <span class="h">all</span>  of  <span class="h">them</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<p><span class="h">The</span> <span class="h">marker</span>  <span class="h">will</span> <span class="h">attempt</span> to   <span class="h">compile</span>  <span class="h">and</span>  <span class="h">run</span>  <span class="h">your</span>  <span class="h">code</span>. If  it <span class="h">does</span> <span class="h">not</span>   <span class="h">work</span>  <span class="h">correctly</span>,  <span class="h">this</span>  <span class="h">will</span>  <span class="h">have</span> <span class="h">implications</span>  <span class="h">for</span> <span class="h">how</span> we   <span class="h">assess</span>  <span class="h">the</span>  <span class="h">other</span>  <span class="h">criteria</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<div><div class="f" aria-hidden="true"><span>&#0050;</span>&#8288;<span>&#0048;</span>&#8288;<span>&#0048;</span>&#8288;<span>&#0055;</span>&#8288;<span>&#0050;</span>&#8288;<span>&#0049;</span>&#8288;<span>&#0052;</span>&#8288;<span>&#0052;</span></div></div><h3>Your  Responses to  the Criteria</h3>
+<p><span class="h">You</span> <span class="h">must</span>   <span class="h">provide</span>  a  <span class="h">response</span>  to  <span class="h">each</span> of  <span class="h">the</span> <span class="h">six</span> <span class="h">critera</span>,   as  <span class="h">part</span>  of  <span class="h">your</span>  <span class="h">submission</span>. <span class="h">That</span>  is, <span class="h">for</span> <span class="h">each</span>   <span class="h">individual</span>  <span class="h">criterion</span>,  <span class="h">write</span>  a  <span class="h">paragraph</span> or  <span class="h">two</span> <span class="h">justifying</span> <span class="h">the</span>   <span class="h">choices</span>  <span class="h">you</span>  <span class="h">have</span>  <span class="h">made</span>.  <span class="h">Include</span> <span class="h">all</span>  <span class="h">your</span> <span class="h">discussion</span> in   <code><span class="h">criteria</span>.<span class="h">txt</span></code>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<p><span class="h">This</span>  <span class="h">fulfils</span>  <span class="h">two</span>  <span class="h">purposes</span>:<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<ol>
+<li>We  <span class="h">want</span> to  <span class="h">know</span> <span class="h">that</span> <span class="h">you</span>   <span class="h">can</span>  <span class="h">articulate</span>,  in  <span class="h">plain</span>  <span class="h">English</span>, <span class="h">what</span>  <span class="h">you</span> <span class="h">are</span> <span class="h">doing</span>.   <span class="h">This</span>  is  <span class="h">part</span>  of  <span class="h">the</span> <span class="h">task</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>If  <span class="h">you</span> do <span class="h">something</span>   <span class="h">unusual</span>/<span class="h">unorthodox</span>,  <span class="h">this</span>  is  <span class="h">your</span>  <span class="h">opportunity</span> to  <span class="h">justify</span> it.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+</ol>
+<p><span class="h">One</span> <span class="h">way</span>   to  <span class="h">think</span>  <span class="h">about</span>  <span class="h">what</span>  <span class="h">you</span>&rsquo;re <span class="h">doing</span>  <span class="h">here</span> is <span class="h">this</span>:   <span class="h">imagine</span>  <span class="h">that</span>  <span class="h">the</span>  <span class="h">marker</span>  is <span class="h">slightly</span>  <span class="h">sceptical</span> <span class="h">about</span> <span class="h">whether</span>   to  <span class="h">award</span>  <span class="h">you</span>  <span class="h">the</span>  <span class="h">marks</span> <span class="h">for</span>  a <span class="h">given</span> <span class="h">criterion</span>.   <span class="h">What</span>  <span class="h">would</span>  <span class="h">you</span>  <span class="h">say</span>  to <span class="h">convince</span>  <span class="h">them</span>?<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<p><span class="h">Make</span> <span class="h">your</span> <span class="h">responses</span>   <span class="h">concise</span>  <span class="h">and</span>  to-<span class="h">the</span>-<span class="h">point</span>.  <span class="h">Address</span>  <span class="h">each</span> <span class="h">criterion</span>  <span class="h">separately</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<div><div class="f" aria-hidden="true"><span>&#0050;</span>&#8288;<span>&#0048;</span>&#8288;<span>&#0048;</span>&#8288;<span>&#0055;</span>&#8288;<span>&#0050;</span>&#8288;<span>&#0049;</span>&#8288;<span>&#0052;</span>&#8288;<span>&#0052;</span></div></div><h2 id="problem_description">Problem Description</h2>
+<p><span class="h">Your</span> <span class="h">task</span>   is  to  <span class="h">design</span>  <span class="h">and</span>  <span class="h">implement</span> a  <span class="h">software</span> <span class="h">system</span> <span class="h">for</span>   <span class="h">controlling</span>  a  <span class="h">Mars</span>  <span class="h">rover</span>;  <span class="h">that</span> is,  a <span class="h">robotic</span> <span class="h">vehicle</span>   <span class="h">for</span>  <span class="h">exploring</span>  <span class="h">Mars</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<div><div class="f" aria-hidden="true"><span>&#0050;</span>&#8288;<span>&#0048;</span>&#8288;<span>&#0048;</span>&#8288;<span>&#0055;</span>&#8288;<span>&#0050;</span>&#8288;<span>&#0049;</span>&#8288;<span>&#0052;</span>&#8288;<span>&#0052;</span></div></div><h3>Commands  from  Earth</h3>
+<p><span class="h">The</span> <span class="h">rover</span>  <span class="h">must</span> <span class="h">take</span> <span class="h">action</span>   in  <span class="h">accordance</span>  <span class="h">with</span>  <span class="h">commands</span>  <span class="h">sent</span> <span class="h">over</span>  <span class="h">radio</span> <span class="h">from</span> <span class="h">the</span>   <span class="h">Space</span>  <span class="h">Agency</span>&rsquo;s  <span class="h">top</span>  <span class="h">scientists</span>  on <span class="h">Earth</span>.  <span class="h">Each</span> <span class="h">command</span> <span class="h">will</span>   be  <span class="h">sent</span>  as  a  <span class="h">single</span> <span class="h">string</span>,  as <span class="h">follows</span>:<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<ul>
+<li>&ldquo;<code>D 23.1</code>&rdquo; &ndash;   a  <span class="h">command</span>  to  <span class="h">drive</span>  <span class="h">forward</span> 23.1  <span class="h">metres</span> (<span class="h">for</span> <span class="h">instance</span>).   <span class="h">Any</span>  <span class="h">positive</span>  <span class="h">distance</span>  is  <span class="h">allowed</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>&ldquo;<code>T 75.5</code>&rdquo; &ndash;  a <span class="h">command</span> to   <span class="h">turn</span>  75.5  <span class="h">degrees</span>  <span class="h">anticlockwise</span>.  <span class="h">Any</span> <span class="h">angle</span>  <span class="h">from</span> -<span class="h">180</span> to   <span class="h">180</span>  is  <span class="h">allowed</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>&ldquo;<code>P</code>&rdquo;  &ndash;  a <span class="h">command</span>  to <span class="h">take</span> a   <span class="h">photo</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>&ldquo;<code>E</code>&rdquo;  &ndash;  a  <span class="h">command</span>  to <span class="h">report</span>  <span class="h">environmental</span> <span class="h">status</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>&ldquo;<code>S</code>&rdquo; &ndash;   a  <span class="h">command</span>  to  <span class="h">perform</span>  <span class="h">soil</span> <span class="h">chemistry</span>  <span class="h">analysis</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+</ul>
+<p><span class="h">Some</span> <span class="h">further</span> <span class="h">constraints</span>   <span class="h">and</span>  <span class="h">clarifications</span>:<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<ul>
+<li>
+<p>If  <span class="h">any</span>  <span class="h">other</span>  <span class="h">kind</span> of  <span class="h">string</span> is <span class="h">provided</span>,   it  is  an  <span class="h">invalid</span>  <span class="h">command</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>
+<p><span class="h">The</span> <span class="h">rover</span>  <span class="h">cannot</span> <span class="h">start</span> <span class="h">soil</span>   <span class="h">analysis</span>  <span class="h">while</span>  <span class="h">driving</span>  or  <span class="h">already</span> <span class="h">performing</span>  <span class="h">soil</span> <span class="h">analysis</span>. An   &ldquo;<code>S</code>&rdquo;  <span class="h">command</span>  is  <span class="h">invalid</span>  <span class="h">under</span> <span class="h">these</span>  <span class="h">conditions</span>. <span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>
+<p><span class="h">The</span> <span class="h">rover</span>   <span class="h">cannot</span>  <span class="h">turn</span>  or  <span class="h">start</span>  <span class="h">driving</span> <span class="h">while</span>  <span class="h">performing</span> <span class="h">soil</span> <span class="h">analysis</span>.   <span class="h">The</span>  &ldquo;<code>D</code>&rdquo;  <span class="h">and</span>  &ldquo;<code>T</code>&rdquo;  <span class="h">commands</span> <span class="h">are</span>  <span class="h">invalid</span> <span class="h">under</span> <span class="h">this</span>   <span class="h">condition</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>
+<p>A  <span class="h">subsequent</span>  &ldquo;<code>D</code>&rdquo;  <span class="h">command</span>  <span class="h">can</span> <span class="h">override</span>  a <span class="h">previous</span> <span class="h">one</span>.   If  <span class="h">the</span>  <span class="h">rover</span>  <span class="h">receives</span>  a &ldquo;<code>D</code>&rdquo;  <span class="h">command</span> <span class="h">while</span> <span class="h">already</span>   <span class="h">driving</span>,  it  <span class="h">must</span>  <span class="h">not</span>  <span class="h">stop</span>, <span class="h">but</span>  <span class="h">rather</span> <span class="h">drive</span> <span class="h">the</span>   <span class="h">newly</span>  <span class="h">indicated</span>  <span class="h">distance</span>  <span class="h">from</span>  <span class="h">its</span> <span class="h">current</span>  <span class="h">location</span> (<span class="h">disregarding</span> <span class="h">whatever</span>   <span class="h">distance</span>  it  <span class="h">had</span>  <span class="h">been</span>  <span class="h">given</span> <span class="h">previously</span>).<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>
+<p>A  &ldquo;<code>T</code>&rdquo; <span class="h">command</span> is   <span class="h">valid</span>  <span class="h">while</span>  <span class="h">either</span>  <span class="h">stopped</span>  or <span class="h">driving</span>.  &ldquo;<code>P</code>&rdquo; <span class="h">and</span> &ldquo;<code>E</code>&rdquo;   <span class="h">are</span>  <span class="h">valid</span>  <span class="h">regardless</span>  of  <span class="h">the</span> <span class="h">situation</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>
+<p><span class="h">For</span>  &ldquo;<code>T</code>&rdquo;, &ldquo;<code>P</code>&rdquo; <span class="h">and</span>   &ldquo;<code>E</code>&rdquo;,  <span class="h">those</span>  <span class="h">actions</span>  <span class="h">can</span>  be <span class="h">completed</span>  <span class="h">immediately</span>, so <span class="h">there</span>   is  no  <span class="h">question</span>  of  <span class="h">what</span> <span class="h">happens</span>  &ldquo;<span class="h">during</span>&rdquo; <span class="h">any</span> of   <span class="h">them</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+</ul>
+<div><div class="f" aria-hidden="true"><span>&#0050;</span>&#8288;<span>&#0048;</span>&#8288;<span>&#0048;</span>&#8288;<span>&#0055;</span>&#8288;<span>&#0050;</span>&#8288;<span>&#0049;</span>&#8288;<span>&#0052;</span>&#8288;<span>&#0052;</span></div></div><h3>Return  Messages</h3>
+<p><span class="h">The</span>  <span class="h">rover</span>  <span class="h">must</span>  <span class="h">also</span> <span class="h">send</span>  <span class="h">various</span> <span class="h">information</span> <span class="h">back</span>   to  <span class="h">Earth</span>,  <span class="h">via</span>  a  <span class="h">similar</span> <span class="h">set</span>  of <span class="h">messages</span>:<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<ul>
+<li>&ldquo;<code>! ...</code>&rdquo; &ndash;   a  <span class="h">return</span>  <span class="h">message</span>  <span class="h">indicating</span>  <span class="h">that</span> <span class="h">the</span>  <span class="h">rover</span> <span class="h">received</span> an   <span class="h">invalid</span>  <span class="h">command</span>,  <span class="h">where</span>  &ldquo;<code>...</code>&rdquo;  is <span class="h">text</span>  of <span class="h">the</span> <span class="h">invalid</span>   <span class="h">command</span>.  If  a  <span class="h">command</span>  is <span class="h">invalid</span>  <em><span class="h">for</span> <span class="h">any</span> <span class="h">reason</span></em>,   it  <span class="h">must</span>  <span class="h">trigger</span>  <span class="h">such</span>  a <span class="h">return</span>  <span class="h">message</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>&ldquo;<code>D</code>&rdquo; &ndash; a   <span class="h">return</span>  <span class="h">message</span>  <span class="h">indicating</span>  <span class="h">that</span>  <span class="h">the</span> <span class="h">rover</span>  <span class="h">has</span> <span class="h">reached</span> <span class="h">its</span>   <span class="h">destination</span>  <span class="h">and</span>  <span class="h">stopped</span>  <span class="h">driving</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>&ldquo;<code>P ...</code>&rdquo;  &ndash; a  <span class="h">return</span> <span class="h">message</span> <span class="h">containing</span>   a  <span class="h">photograph</span>,  <span class="h">where</span>  &ldquo;<code>...</code>&rdquo;  is <span class="h">the</span>  <span class="h">image</span> <span class="h">data</span> <span class="h">encoded</span>   in  <a href="#base64"><span class="h">Base64</span></a>.  (<span class="h">The</span>  <span class="h">full</span>  <span class="h">message</span> is  <span class="h">likely</span> to be   <span class="h">quite</span>  <span class="h">long</span>.)<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>&ldquo;<code>E -15.8 7.1 <span class="h">13774</span></code>&rdquo;  &ndash;  a  <span class="h">return</span> <span class="h">message</span>  <span class="h">reporting</span> a <span class="h">temperature</span>   of  -15.8  °C,  a  <span class="h">visibility</span> of  7.1 km, <span class="h">and</span>   an  <span class="h">ambient</span>  <span class="h">light</span>  <span class="h">level</span>  of 13,<span class="h">774</span>  <span class="h">lux</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>&ldquo;<code>S ...</code>&rdquo; &ndash; a   <span class="h">return</span>  <span class="h">message</span>  <span class="h">containing</span>  <span class="h">completed</span>  <span class="h">soil</span> <span class="h">chemistry</span>  <span class="h">analysis</span>, <span class="h">where</span> &ldquo;<code>...</code>&rdquo;   is  <span class="h">the</span>  <span class="h">analysis</span>  <span class="h">data</span>  <span class="h">encoded</span> in  <a href="#base64"><span class="h">Base64</span></a>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+</ul>
+<p><span class="h">These</span> <span class="h">return</span> <span class="h">messages</span>   <span class="h">have</span>  <span class="h">different</span>  <span class="h">timing</span>/<span class="h">triggering</span>  <span class="h">requirements</span>:<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<ul>
+<li>
+<p><span class="h">The</span>  &ldquo;<code>!</code>&rdquo;, &ldquo;<code>P</code>&rdquo;  <span class="h">and</span> &ldquo;<code>E</code>&rdquo; <span class="h">messages</span>   <span class="h">can</span>  be  <span class="h">sent</span>  <span class="h">almost</span>  <span class="h">right</span> <span class="h">away</span>  <span class="h">after</span> <span class="h">receiving</span> <span class="h">the</span>   <span class="h">corresponding</span>  <span class="h">command</span>  (<span class="h">allowing</span>  <span class="h">for</span>  a <span class="h">trivial</span>  <span class="h">amount</span> of <span class="h">time</span>   <span class="h">needed</span>  to  <span class="h">take</span>  a  <span class="h">photo</span> or  <span class="h">measure</span> <span class="h">environmental</span> <span class="h">conditions</span>).   <span class="h">The</span>  <span class="h">software</span>  <span class="h">doesn</span>&rsquo;t  <span class="h">need</span>  to <span class="h">wait</span>  <span class="h">for</span> a <span class="h">second</span>   <span class="h">event</span>  to  <span class="h">occur</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>
+<p>An  &ldquo;<code>E</code>&rdquo;  <span class="h">return</span> <span class="h">message</span>  <span class="h">must</span> <em><span class="h">also</span></em> be   <span class="h">sent</span>,  <span class="h">even</span>  if  no  &ldquo;<code>E</code>&rdquo; <span class="h">command</span>  <span class="h">was</span> <span class="h">received</span>, <em>if   <span class="h">and</span>  <span class="h">when</span></em>  <span class="h">the</span>  <span class="h">visibility</span>  <span class="h">falls</span> <span class="h">below</span>  4 km, or   <span class="h">rises</span>  <span class="h">above</span>  5  km  (i.e., <span class="h">whenever</span>  it <span class="h">crosses</span> <span class="h">those</span>   <span class="h">thresholds</span>).  <span class="h">Such</span>  <span class="h">automatic</span>  <span class="h">messages</span>  <span class="h">must</span> <span class="h">still</span>  <span class="h">specify</span> <span class="h">all</span> <span class="h">three</span>   <span class="h">values</span>  as  <span class="h">above</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>
+<p>A  &ldquo;<code>D</code>&rdquo;  <span class="h">return</span> <span class="h">message</span>  <span class="h">must</span> <span class="h">only</span> be   <span class="h">sent</span>  <span class="h">once</span>  <span class="h">the</span>  <span class="h">rover</span>  <em><span class="h">stops</span></em> <span class="h">driving</span>,  <span class="h">which</span> <span class="h">will</span> be   <span class="h">some</span>  <span class="h">time</span>  <span class="h">after</span>  <span class="h">the</span>  &ldquo;<code>D</code>&rdquo; <span class="h">command</span>  <span class="h">was</span> <span class="h">received</span>. <span class="h">Other</span>   <span class="h">events</span>/<span class="h">commands</span>  (<span class="h">except</span>  <span class="h">for</span>  <span class="h">soil</span>  <span class="h">analysis</span>) <span class="h">may</span>  <span class="h">happen</span> in <span class="h">the</span>   <span class="h">mean</span>  <span class="h">time</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>
+<p><span class="h">Similarly</span>,  an  &ldquo;<code>S</code>&rdquo;  <span class="h">return</span> <span class="h">message</span>  <span class="h">must</span> <span class="h">only</span> be   <span class="h">sent</span>  <span class="h">once</span>  <span class="h">soil</span>  <span class="h">analysis</span>  is <span class="h">complete</span>,  <span class="h">which</span> <span class="h">will</span> be   <span class="h">some</span>  <span class="h">time</span>  <span class="h">after</span>  <span class="h">the</span>  &ldquo;<code>S</code>&rdquo; <span class="h">command</span>  <span class="h">was</span> <span class="h">received</span>. &ldquo;<code>P</code>&rdquo;   <span class="h">and</span>  &ldquo;<code>E</code>&rdquo;  <span class="h">commands</span>/<span class="h">events</span>  <span class="h">may</span>  <span class="h">happen</span> in  <span class="h">the</span> <span class="h">mean</span> <span class="h">time</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+</ul>
+<div><div class="f" aria-hidden="true"><span>&#0050;</span>&#8288;<span>&#0048;</span>&#8288;<span>&#0048;</span>&#8288;<span>&#0055;</span>&#8288;<span>&#0050;</span>&#8288;<span>&#0049;</span>&#8288;<span>&#0052;</span>&#8288;<span>&#0052;</span></div></div><h3>Rover   API</h3>
+<p><span class="h">Several</span>  <span class="h">predefined</span>  <span class="h">classes</span>  <span class="h">will</span>  <span class="h">allow</span> <span class="h">your</span>  <span class="h">code</span> to <span class="h">interact</span>   <span class="h">with</span>  <span class="h">the</span>  <span class="h">rover</span>&rsquo;s  <span class="h">hardware</span>  <span class="h">systems</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<p><strong><span class="h">Important</span>:</strong> <span class="h">You</span>  <span class="h">must</span> <span class="h">create</span> <em><span class="h">one</span></em>,   <span class="h">and</span>  <em><span class="h">only</span>  <span class="h">one</span></em>,  <span class="h">object</span>  of <span class="h">each</span>  <span class="h">class</span> (<code><span class="h">EarthComm</span></code>, <code><span class="h">Sensors</span></code>,   <code><span class="h">EngineSystem</span></code>  <span class="h">and</span>  <code><span class="h">SoilAnalyser</span></code>).  <span class="h">The</span>  <span class="h">methods</span> <span class="h">are</span>  <span class="h">all</span> <span class="h">non</span>-<span class="h">static</span>, <span class="h">but</span>   <span class="h">the</span>  <span class="h">rover</span>&rsquo;s  <span class="h">hardware</span>  <span class="h">cannot</span>  be <span class="h">controlled</span>  <span class="h">from</span> <span class="h">multiple</span> <span class="h">instances</span>   of  <span class="h">these</span>  <span class="h">classes</span>  at  <span class="h">the</span> <span class="h">same</span>  <span class="h">time</span>. (<span class="h">This</span> <span class="h">doesn</span>&rsquo;t   <span class="h">mean</span>  <span class="h">you</span>  <span class="h">have</span>  to  <span class="h">use</span> <span class="h">the</span>  <span class="h">Singleton</span> <span class="h">pattern</span>, <span class="h">and</span>   in  <span class="h">fact</span>  it&rsquo;s  <span class="h">better</span>  if <span class="h">you</span>  <span class="h">don</span>&rsquo;t. <span class="h">You</span> <span class="h">just</span>   <span class="h">need</span>  to  <span class="h">make</span>  <span class="h">one</span>  <span class="h">object</span> of  <span class="h">each</span> <span class="h">class</span>.)<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<p><span class="h">The</span> <span class="h">declarations</span>   <span class="h">are</span>  <span class="h">shown</span>  in  <span class="h">Java</span>,  <span class="h">but</span> <span class="h">translate</span>  <span class="h">easily</span> to <span class="h">the</span>   <span class="h">other</span>  <span class="h">languages</span>.  <span class="h">You</span>  <span class="h">can</span>  <span class="h">modify</span> <span class="h">the</span>  <span class="h">method</span> <span class="h">names</span> to   <span class="h">conform</span>  to  <span class="h">local</span>  <span class="h">naming</span>  <span class="h">conventions</span>. <span class="h">The</span>  <span class="h">Python</span> 3 <span class="h">equivalent</span>   to  <code><span class="h">byte</span>[]</code>  is  a  <a href="https://docs.python.org/3/library/stdtypes.html#bytes-objects"><code><span class="h">bytes</span></code></a> <span class="h">object</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<p><em>(<span class="h">See</span>  <span class="h">further</span> <span class="h">notes</span> <span class="h">underneath</span>   <span class="h">the</span>  <span class="h">declarations</span>.)</em><span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<div class="admonition api">
+<p class="admonition-title"><span class="h">API</span>  <span class="h">Declarations</span>  (<span class="h">Java</span>)<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<div class="highlight"><pre><span></span><code><span class="kd"><span class="h">public</span></span> <span class="kd"><span class="h">class</span></span> <span class="nc"><span class="h">EarthComm</span></span>
+<span class="p">{</span>
+    <span class="cm">/** </span>
+<span class="cm">     * <span class="h">Return</span> <span class="h">the</span> <span class="h">next</span> <span class="h">command</span> <span class="h">received</span> <span class="h">from</span> <span class="h">Earth</span>, or <span class="h">null</span> if no <span class="h">further</span> <span class="h">command</span> </span>
+<span class="cm">     * <span class="h">has</span> <span class="h">been</span> <span class="h">received</span>. If <span class="h">multiple</span> <span class="h">commands</span> <span class="h">arrive</span> in <span class="h">between</span> <span class="h">calls</span> to </span>
+<span class="cm">     * <span class="h">pollCommand</span>(), <span class="h">they</span> <span class="h">will</span> be <span class="h">buffered</span> (<span class="h">stored</span> <span class="h">temporarily</span>), <span class="h">and</span> <span class="h">subsequent</span> </span>
+<span class="cm">     * <span class="h">calls</span> to <span class="h">pollCommand</span>() <span class="h">will</span> <span class="h">return</span> <span class="h">one</span> <span class="h">command</span> at a <span class="h">time</span>, in <span class="h">the</span> <span class="h">order</span> of </span>
+<span class="cm">     * <span class="h">arrival</span>. </span>
+<span class="cm">     *</span>
+<span class="cm">     * <span class="h">There</span> is no <span class="h">risk</span> of <span class="h">commands</span> <span class="h">being</span> <span class="h">lost</span>. <span class="h">But</span> <span class="h">pollCommand</span>() *<span class="h">will</span> <span class="h">not</span> <span class="h">wait</span>*</span>
+<span class="cm">     * <span class="h">for</span> a <span class="h">command</span> to be <span class="h">received</span> if <span class="h">none</span> <span class="h">has</span> <span class="h">been</span> <span class="h">yet</span>.</span>
+<span class="cm">     */</span>
+    <span class="kd"><span class="h">public</span></span> <span class="n"><span class="h">String</span></span> <span class="nf"><span class="h">pollCommand</span></span><span class="p">()</span> <span class="p">{...}</span>
+
+    <span class="cm">/** <span class="h">Sends</span> a <span class="h">return</span> <span class="h">message</span> to <span class="h">Earth</span>. */</span>
+    <span class="kd"><span class="h">public</span></span> <span class="kt"><span class="h">void</span></span> <span class="nf"><span class="h">sendMessage</span></span><span class="p">(</span><span class="n"><span class="h">String</span></span> <span class="n"><span class="h">msg</span></span><span class="p">)</span> <span class="p">{...}</span>
+<span class="p">}</span>
+
+<span class="kd"><span class="h">public</span></span> <span class="kd"><span class="h">class</span></span> <span class="nc"><span class="h">Sensors</span></span>
+<span class="p">{</span>
+    <span class="cm">/** <span class="h">Performs</span> a <span class="h">temperature</span> <span class="h">reading</span> <span class="h">and</span> <span class="h">returns</span> <span class="h">the</span> <span class="h">result</span> in °C. */</span>
+    <span class="kd"><span class="h">public</span></span> <span class="kt"><span class="h">double</span></span> <span class="nf"><span class="h">readTemperature</span></span><span class="p">()</span> <span class="p">{...}</span>
+
+    <span class="cm">/** <span class="h">Performs</span> a <span class="h">visibility</span> <span class="h">reading</span> <span class="h">and</span> <span class="h">returns</span> <span class="h">the</span> <span class="h">result</span> in km. */</span>
+    <span class="kd"><span class="h">public</span></span> <span class="kt"><span class="h">double</span></span> <span class="nf"><span class="h">readVisibility</span></span><span class="p">()</span> <span class="p">{...}</span>
+
+    <span class="cm">/** <span class="h">Performs</span> a <span class="h">light</span>-<span class="h">level</span> <span class="h">reading</span>, <span class="h">and</span> <span class="h">returns</span> <span class="h">the</span> <span class="h">result</span> in <span class="h">lux</span> (<span class="h">units</span>). */</span>
+    <span class="kd"><span class="h">public</span></span> <span class="kt"><span class="h">double</span></span> <span class="nf"><span class="h">readLightLevel</span></span><span class="p">()</span> <span class="p">{...}</span>
+
+    <span class="cm">/** <span class="h">Takes</span> a <span class="h">photo</span> <span class="h">and</span> <span class="h">returns</span> <span class="h">the</span> <span class="h">binary</span> <span class="h">data</span> <span class="h">making</span> up <span class="h">the</span> <span class="h">image</span>. */</span>
+    <span class="kd"><span class="h">public</span></span> <span class="kt"><span class="h">byte</span></span><span class="o">[]</span> <span class="nf"><span class="h">takePhoto</span></span><span class="p">()</span> <span class="p">{...}</span>
+<span class="p">}</span>
+
+<span class="kd"><span class="h">public</span></span> <span class="kd"><span class="h">class</span></span> <span class="nc"><span class="h">EngineSystem</span></span>
+<span class="p">{</span>
+    <span class="cm">/** </span>
+<span class="cm">     * <span class="h">Begins</span> <span class="h">driving</span> <span class="h">forward</span>. <span class="h">The</span> <span class="h">effect</span> is *<span class="h">not</span>* to <span class="h">drive</span> a <span class="h">fixed</span> <span class="h">distance</span>, <span class="h">but</span> </span>
+<span class="cm">     * to <span class="h">simply</span> <span class="h">start</span> <span class="h">driving</span>. <span class="h">The</span> <span class="h">rover</span> <span class="h">will</span> <span class="h">not</span> <span class="h">stop</span> <span class="h">until</span> <span class="h">the</span> <span class="h">stopDriving</span>() </span>
+<span class="cm">     * <span class="h">method</span> is <span class="h">subsequently</span> <span class="h">called</span>.</span>
+<span class="cm">     *</span>
+<span class="cm">     * If <span class="h">startDriving</span>() is <span class="h">called</span> <span class="h">while</span> <span class="h">the</span> <span class="h">rover</span> is <span class="h">already</span> <span class="h">driving</span>, it <span class="h">will</span></span>
+<span class="cm">     * <span class="h">throw</span> an <span class="h">exception</span>.</span>
+<span class="cm">     */</span>
+    <span class="kd"><span class="h">public</span></span> <span class="kt"><span class="h">void</span></span> <span class="nf"><span class="h">startDriving</span></span><span class="p">()</span> <span class="p">{...}</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * <span class="h">Stops</span> <span class="h">driving</span>.</span>
+<span class="cm">     *</span>
+<span class="cm">     * If <span class="h">stopDriving</span>() is <span class="h">called</span> <span class="h">while</span> <span class="h">the</span> <span class="h">rover</span> is <span class="h">already</span> <span class="h">stopped</span>, it <span class="h">will</span> </span>
+<span class="cm">     * <span class="h">throw</span> an <span class="h">exception</span>.</span>
+<span class="cm">     */</span>
+    <span class="kd"><span class="h">public</span></span> <span class="kt"><span class="h">void</span></span> <span class="nf"><span class="h">stopDriving</span></span><span class="p">()</span> <span class="p">{...}</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * <span class="h">Immediately</span> <span class="h">turns</span> <span class="h">the</span> <span class="h">rover</span> by <span class="h">the</span> <span class="h">specified</span> <span class="h">angle</span> <span class="h">anticlockwise</span> (<span class="h">negative</span></span>
+<span class="cm">     * <span class="h">for</span> <span class="h">clockwise</span>).</span>
+<span class="cm">     */</span>
+    <span class="kd"><span class="h">public</span></span> <span class="kt"><span class="h">void</span></span> <span class="nf"><span class="h">turn</span></span><span class="p">(</span><span class="kt"><span class="h">double</span></span> <span class="n"><span class="h">angle</span></span><span class="p">)</span> <span class="p">{...}</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * <span class="h">Returns</span> <span class="h">the</span> <span class="h">total</span> <span class="h">distance</span> <span class="h">that</span> <span class="h">the</span> <span class="h">rover</span> <span class="h">has</span> <span class="h">ever</span> <span class="h">driven</span>, <span class="h">since</span> it <span class="h">first</span> </span>
+<span class="cm">     * <span class="h">landed</span> on <span class="h">Mars</span>. <span class="h">This</span> <span class="h">figure</span> is <span class="h">never</span> <span class="h">reset</span>. It <span class="h">remains</span> <span class="h">constant</span> <span class="h">while</span> <span class="h">the</span> </span>
+<span class="cm">     * <span class="h">rover</span> is <span class="h">stopped</span>, <span class="h">and</span> <span class="h">increases</span> <span class="h">while</span> <span class="h">the</span> <span class="h">rover</span> is <span class="h">driving</span>. </span>
+<span class="cm">     */</span>     
+    <span class="kd"><span class="h">public</span></span> <span class="kt"><span class="h">double</span></span> <span class="nf"><span class="h">getDistanceDriven</span></span><span class="p">()</span> <span class="p">{...}</span>
+<span class="p">}</span>
+
+<span class="kd"><span class="h">public</span></span> <span class="kd"><span class="h">class</span></span> <span class="nc"><span class="h">SoilAnalyser</span></span>
+<span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * <span class="h">Begins</span> a <span class="h">soil</span> <span class="h">analysis</span>. <span class="h">The</span> <span class="h">soil</span> <span class="h">analysis</span> <span class="h">will</span> <span class="h">complete</span> <span class="h">some</span> <span class="h">time</span> <span class="h">later</span>, </span>
+<span class="cm">     * <span class="h">and</span> <span class="h">its</span> <span class="h">result</span> <span class="h">can</span> be <span class="h">retrieved</span> by <span class="h">calling</span> <span class="h">pollAnalysis</span>().</span>
+<span class="cm">     *</span>
+<span class="cm">     * If <span class="h">startAnalysis</span>() is <span class="h">called</span> <span class="h">while</span> <span class="h">analysis</span> is <span class="h">already</span> <span class="h">underway</span>, it <span class="h">will</span> </span>
+<span class="cm">     * <span class="h">throw</span> an <span class="h">exception</span>.</span>
+<span class="cm">     */</span>
+    <span class="kd"><span class="h">public</span></span> <span class="kt"><span class="h">void</span></span> <span class="nf"><span class="h">startAnalysis</span></span><span class="p">()</span> <span class="p">{...}</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * <span class="h">Retrieves</span> <span class="h">the</span> <span class="h">results</span> of a <span class="h">soil</span> <span class="h">analysis</span>, if <span class="h">they</span>&#39;re <span class="h">ready</span> <span class="h">yet</span>. If no <span class="h">new</span> </span>
+<span class="cm">     * <span class="h">results</span> <span class="h">have</span> <span class="h">been</span> <span class="h">produced</span>, <span class="h">this</span> <span class="h">method</span> <span class="h">returns</span> <span class="h">null</span>.</span>
+<span class="cm">     */</span>
+    <span class="kd"><span class="h">public</span></span> <span class="kt"><span class="h">byte</span></span><span class="o">[]</span> <span class="nf"><span class="h">pollAnalysis</span></span><span class="p">()</span> <span class="p">{...}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<p><span class="h">These</span>  <span class="h">classes</span> <span class="h">are</span>  <em><span class="h">not</span></em> <span class="h">considered</span> &lsquo;<span class="h">your</span>   <span class="h">work</span>&rsquo;.  <span class="h">Assume</span>  <span class="h">that</span>  <span class="h">another</span>  <span class="h">software</span> <span class="h">development</span>  <span class="h">team</span> is <span class="h">working</span>   on  <span class="h">them</span>.  <span class="h">Therefore</span>:<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<ul>
+<li>
+<p><span class="h">Don</span>&rsquo;t  <span class="h">make</span>  <span class="h">any</span> <span class="h">assumptions</span>  <span class="h">about</span> <span class="h">what</span> <span class="h">they</span>   do,  <span class="h">other</span>  <span class="h">than</span>  <span class="h">what</span>  <span class="h">can</span> be  <span class="h">seen</span> in <span class="h">the</span>   <span class="h">declarations</span>  <span class="h">and</span>  <span class="h">comments</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>
+<p><em>Do</em>  <span class="h">make</span>  <span class="h">stubs</span> of  <span class="h">these</span> <span class="h">classes</span> <span class="h">for</span>   <span class="h">the</span>  <span class="h">purposes</span>  of  <span class="h">testing</span>  <span class="h">your</span> <span class="h">code</span>.  (A &ldquo;<span class="h">stub</span>&rdquo; is   a  <span class="h">highly</span>  <span class="h">simplified</span>,  <span class="h">placeholder</span>  <span class="h">version</span> of  a <span class="h">class</span>/<span class="h">method</span> <span class="h">used</span>   to  <span class="h">test</span>  <span class="h">whether</span>  <em><span class="h">another</span></em>  <span class="h">class</span> or  <span class="h">method</span> <span class="h">works</span>.) <span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>
+<p><span class="h">Understand</span>   <span class="h">that</span>,  if  <span class="h">you</span>  <span class="h">implement</span>  <span class="h">any</span> of  <span class="h">these</span> <span class="h">classes</span>, <span class="h">those</span>   <span class="h">implementations</span>  <span class="h">will</span>  (in  <span class="h">principle</span>)  be <span class="h">deleted</span>  <span class="h">and</span> <span class="h">replaced</span> by   <span class="h">the</span>  <span class="h">other</span>  <span class="h">team</span>&rsquo;s  <span class="h">work</span>.  So <span class="h">don</span>&rsquo;t  <span class="h">put</span> <span class="h">any</span> of   <span class="h">your</span>  <span class="h">actual</span>  <span class="h">design</span>  <span class="h">into</span>  <span class="h">them</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+</ul>
+<div><div class="f" aria-hidden="true"><span>&#0050;</span>&#8288;<span>&#0048;</span>&#8288;<span>&#0048;</span>&#8288;<span>&#0055;</span>&#8288;<span>&#0050;</span>&#8288;<span>&#0049;</span>&#8288;<span>&#0052;</span>&#8288;<span>&#0052;</span></div></div><h3>Hint: Architecture</h3>
+<p><span class="h">You</span>  <span class="h">are</span> <span class="h">likely</span> to   <span class="h">find</span>  <span class="h">that</span>  <span class="h">the</span>  <span class="h">MVC</span>  <span class="h">architecture</span> <span class="h">simply</span>  <span class="h">does</span> <span class="h">not</span> <span class="h">apply</span>   to  <span class="h">this</span>  <span class="h">situation</span>.  <span class="h">Nonetheless</span>,  <span class="h">you</span> <span class="h">should</span>  <span class="h">find</span> a <span class="h">sensible</span>   <span class="h">way</span>  to  <span class="h">break</span>  up  <span class="h">the</span> <span class="h">system</span>  <span class="h">into</span> <span class="h">packages</span>/<span class="h">namespaces</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<p><span class="h">Why</span> no   <span class="h">MVC</span>?  <span class="h">First</span>,  <span class="h">because</span>  <span class="h">there</span>&rsquo;s  no <span class="h">user</span>  <span class="h">interface</span>. <span class="h">And</span> <span class="h">second</span>,   <span class="h">because</span>  <span class="h">there</span>&rsquo;s  <span class="h">virtually</span>  no  <span class="h">data</span> to  <span class="h">model</span>. <span class="h">The</span> <span class="h">system</span>   is  <span class="h">driven</span>  by  <span class="h">events</span>  <span class="h">and</span> <span class="h">state</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<p>To  <span class="h">emphasise</span> <span class="h">one</span> <span class="h">key</span>   <span class="h">point</span>:  <span class="h">your</span>  <span class="h">software</span>  is  <em><span class="h">only</span></em> <span class="h">running</span>  on <span class="h">the</span> <span class="h">rover</span>   <span class="h">itself</span>.  <span class="h">You</span>  <span class="h">are</span>  <span class="h">not</span>  <span class="h">writing</span> <span class="h">any</span>  of <span class="h">the</span> <span class="h">code</span>   <span class="h">that</span>  <span class="h">will</span>  <span class="h">run</span>  on  <span class="h">Earth</span>. It&rsquo;s  <span class="h">for</span> <span class="h">this</span> <span class="h">reason</span>   <span class="h">that</span>  <span class="h">your</span>  <span class="h">software</span>  <span class="h">does</span>  <span class="h">not</span> <span class="h">need</span>  a UI, <span class="h">and</span>   <span class="h">cannot</span>  <span class="h">usefully</span>  <span class="h">have</span>  <span class="h">one</span>.  If <span class="h">there</span>  <span class="h">was</span> <span class="h">someone</span> on   <span class="h">Mars</span>  to  <span class="h">use</span>  <span class="h">the</span>  UI, <span class="h">then</span>  <span class="h">why</span> <span class="h">did</span> we   <span class="h">send</span>  <span class="h">the</span>  <span class="h">rover</span>  at  <span class="h">all</span>?<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<div class="admonition warning">
+<p class="admonition-title"><span class="h">Warning</span><span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<p>If <span class="h">you</span>  do <span class="h">create</span> an   <span class="h">interactive</span>  <span class="h">user</span>  <span class="h">interface</span>  <span class="h">for</span>  <span class="h">the</span> <span class="h">rover</span>,  <span class="h">you</span> <span class="h">will</span> be   <span class="h">forcibly</span>  <span class="h">sent</span>  on  a  <span class="h">one</span>-<span class="h">way</span> <span class="h">trip</span>  to <span class="h">Mars</span> to   <span class="h">use</span>  it.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+</div>
+<!--For reference, it takes anywhere from 3 to 22 minutes for a single message transmission from Earth to Mars, or vice versa (depending on the relative positions of the planets).-->
+
+<p><span class="h">The</span>  <span class="h">requirements</span>  <span class="h">will</span>  <span class="h">lead</span> <span class="h">inevitably</span>  to <span class="h">one</span> <span class="h">key</span>   <span class="h">architectural</span>  <span class="h">choice</span>:  <span class="h">the</span>  <span class="h">use</span>  of an  <span class="h">infinite</span> <span class="h">loop</span> <span class="h">like</span>   <span class="h">this</span>:<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<div class="highlight"><pre><span></span><code><span class="h">while</span>(<span class="h">true</span>)
+{
+    <span class="h">poll</span> <span class="h">everything</span>
+    <span class="h">perform</span> <span class="h">actions</span> if <span class="h">needed</span>
+    <span class="h">sleep</span> <span class="h">for</span> a <span class="h">few</span> <span class="h">milliseconds</span>
+}
+</code></pre></div>
+<p>We  <span class="h">call</span>  <span class="h">this</span>  an  &ldquo;<span class="h">event</span> <span class="h">loop</span>&rdquo;  (or a <span class="h">very</span>   <span class="h">basic</span>  <span class="h">version</span>  of  an  <span class="h">event</span> <span class="h">loop</span>,  <span class="h">anyway</span>); <span class="h">something</span> <span class="h">similar</span>   <span class="h">typically</span>  <span class="h">appears</span>  in  <span class="h">games</span>  <span class="h">and</span> <span class="h">simulations</span>.  In <span class="h">our</span> <span class="h">case</span>,   <span class="h">there</span>  is  no  <span class="h">need</span>  to <span class="h">exit</span>  <span class="h">from</span> <span class="h">this</span> <span class="h">loop</span>,   <span class="h">because</span>  <span class="h">there</span>  <span class="h">are</span>  no  <span class="h">conditions</span> <span class="h">under</span>  <span class="h">which</span> <span class="h">the</span> <span class="h">Rover</span>&rsquo;s   <span class="h">software</span>  <span class="h">should</span>  <span class="h">terminate</span>  (<span class="h">though</span>  <span class="h">for</span> <span class="h">testing</span>  <span class="h">purposes</span> <span class="h">you</span> <span class="h">can</span>   <span class="h">type</span>  <span class="h">Ctrl</span>-C  at  <span class="h">the</span>  <span class="h">terminal</span>). <span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<p>&ldquo;<span class="h">Polling</span>&rdquo;  <span class="h">just</span> <span class="h">means</span> <span class="h">actively</span>   <span class="h">checking</span>  <span class="h">whether</span>  <span class="h">events</span>  <span class="h">have</span>  <span class="h">occurred</span>. <span class="h">For</span>  <span class="h">instance</span>, <span class="h">how</span> do   <span class="h">you</span>  <span class="h">know</span>  <span class="h">when</span>  <span class="h">the</span>  <span class="h">rover</span> <span class="h">needs</span>  to <span class="h">stop</span> <span class="h">driving</span>?   <span class="h">You</span>  <span class="h">keep</span>  <span class="h">checking</span>  (<span class="h">polling</span>)  <span class="h">the</span> <span class="h">total</span>  <span class="h">distance</span> it <span class="h">has</span>   <span class="h">travelled</span>,  <span class="h">and</span>  <span class="h">subtract</span>  <span class="h">the</span>  <span class="h">distance</span> it  <span class="h">had</span> <span class="h">already</span> <span class="h">travelled</span>   <span class="h">when</span>  it  <span class="h">started</span>  <span class="h">driving</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<div><div class="f" aria-hidden="true"><span>&#0050;</span>&#8288;<span>&#0048;</span>&#8288;<span>&#0048;</span>&#8288;<span>&#0055;</span>&#8288;<span>&#0050;</span>&#8288;<span>&#0049;</span>&#8288;<span>&#0052;</span>&#8288;<span>&#0052;</span></div></div><h3>Hint:  Sleeping</h3>
+<p><span class="h">Sleeping</span> (i.e.,  <span class="h">doing</span> <span class="h">nothing</span> <span class="h">for</span>   a  <span class="h">small</span>  <span class="h">period</span>)  is  <span class="h">necessary</span> so  <span class="h">that</span> we <span class="h">don</span>&rsquo;t   <span class="h">waste</span>  <span class="h">energy</span>  or  <span class="h">overheat</span>  <span class="h">our</span> <span class="h">device</span>  by <span class="h">needlessly</span> <span class="h">polling</span>   <span class="h">hundreds</span>  of  <span class="h">millions</span>  of  <span class="h">times</span> <span class="h">per</span>  <span class="h">second</span>. (<span class="h">Try</span> <em><span class="h">not</span></em>   <span class="h">sleeping</span>  <span class="h">inside</span>  <span class="h">this</span>  <span class="h">loop</span>,  <span class="h">and</span> <span class="h">you</span>&rsquo;ll  <span class="h">hear</span> <span class="h">your</span> <span class="h">machine</span>&rsquo;s   <span class="h">CPU</span>  <span class="h">fan</span>  go  <span class="h">into</span>  <span class="h">overdrive</span> to  <span class="h">dissipate</span> <span class="h">the</span> <span class="h">heat</span>   <span class="h">from</span>  <span class="h">all</span>  <span class="h">the</span>  <span class="h">useless</span>  <span class="h">effort</span> <span class="h">the</span>  <span class="h">CPU</span> <span class="h">has</span> to   <span class="h">put</span>  in!)  <span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<p>So,  <span class="h">here</span>&rsquo;s  <span class="h">some</span> <span class="h">relevant</span>  <span class="h">API</span> <span class="h">references</span>:<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<ul>
+<li><span class="h">Java</span>: <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Thread.html#sleep(long)"><code><span class="h">Thread</span>.<span class="h">sleep</span>(<span class="h">millisecs</span>)</code></a>.   (<span class="h">You</span>  <span class="h">will</span>  <span class="h">have</span>  to  <span class="h">catch</span> <code><span class="h">InterruptedException</span></code>  <span class="h">and</span> <span class="h">treat</span> it   as  an  <span class="h">internal</span>  <span class="h">error</span>.  In <span class="h">multithreaded</span>  <span class="h">code</span>, <span class="h">this</span> <span class="h">exception</span>   <span class="h">has</span>  a  <span class="h">specific</span>  <span class="h">purpose</span>,  <span class="h">but</span> it  <span class="h">shouldn</span>&rsquo;t <span class="h">happen</span> in   <span class="h">the</span>  <span class="h">ordinary</span>  <span class="h">single</span>-<span class="h">threaded</span>  <span class="h">code</span>  <span class="h">that</span> <span class="h">you</span>&rsquo;ll  be <span class="h">writing</span>.)<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li><span class="h">Python</span>: <a href="https://docs.python.org/3/library/time.html#time.sleep"><code><span class="h">time</span>.<span class="h">sleep</span>(<span class="h">secs</span>)</code></a>   (<span class="h">where</span>  <code><span class="h">secs</span></code>  is  a  <code><span class="h">float</span></code>).<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>C#: <a href="https://docs.microsoft.com/en-us/dotnet/api/system.threading.thread.sleep?view=net-5.0#System_Threading_Thread_Sleep_System_Int32_"><code><span class="h">Thread</span>.<span class="h">Sleep</span>(<span class="h">millisecs</span>)</code></a>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>C++:  <a href="https://www.cplusplus.com/reference/thread/this_thread/sleep_for/"><code><span class="h">std</span>::<span class="h">this_thread</span>::<span class="h">sleep_for</span>(<span class="h">duration</span>)</code></a>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+</ul>
+<div><div class="f" aria-hidden="true"><span>&#0050;</span>&#8288;<span>&#0048;</span>&#8288;<span>&#0048;</span>&#8288;<span>&#0055;</span>&#8288;<span>&#0050;</span>&#8288;<span>&#0049;</span>&#8288;<span>&#0052;</span>&#8288;<span>&#0052;</span></div></div><h3 id="base64">Hint: Base64</h3>
+<p><span class="h">Base64</span> is   a  <span class="h">scheme</span>  <span class="h">for</span>  <span class="h">representing</span>  <span class="h">binary</span> <span class="h">data</span>  <span class="h">using</span> <span class="h">the</span> <span class="h">characters</span>   <code>a</code>-<code>z</code>,  <code>A</code>-<code>Z</code>,  <code>0</code>-<code>9</code>,  <code>+</code>,  <code>/</code> <span class="h">and</span>  <code>=</code>. <span class="h">Here</span>&rsquo;s <span class="h">some</span>   <span class="h">relevant</span>  <span class="h">API</span>  <span class="h">references</span>:<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<ul>
+<li><span class="h">Java</span>:  <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Base64.Encoder.html#encodeToString(byte%5B%5D)"><code><span class="h">Base64</span>.<span class="h">Encoder</span>.<span class="h">encodeToString</span>(<span class="h">byte</span>[])</code></a>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li><span class="h">Python</span>:  <a href="https://docs.python.org/3/library/base64.html"><code><span class="h">base64</span>.<span class="h">b64encode</span>(<span class="h">bytes</span>)</code></a>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>C#: <a href="https://docs.microsoft.com/en-us/dotnet/api/system.convert.tobase64string?view=net-5.0#System_Convert_ToBase64String_System_Byte___"><code><span class="h">System</span>.<span class="h">Convert</span>.<span class="h">ToBase64String</span>(<span class="h">byte</span>[])</code></a>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+<li>C++:  <span class="h">sorry</span>, <span class="h">you</span>&rsquo;re on   <span class="h">your</span>  <span class="h">own</span>!  <span class="h">You</span>  <span class="h">are</span>  <span class="h">welcome</span> to  <span class="h">find</span> <span class="h">and</span> <span class="h">use</span>   a  <span class="h">third</span>-<span class="h">party</span>  <span class="h">Base64</span>  <span class="h">encoder</span>,  <span class="h">provided</span> <span class="h">you</span>  <span class="h">reference</span> <span class="h">your</span> <span class="h">source</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></li>
+</ul>
+<div><div class="f" aria-hidden="true"><span>&#0050;</span>&#8288;<span>&#0048;</span>&#8288;<span>&#0048;</span>&#8288;<span>&#0055;</span>&#8288;<span>&#0050;</span>&#8288;<span>&#0049;</span>&#8288;<span>&#0052;</span>&#8288;<span>&#0052;</span></div></div><h2>Academic   Integrity</h2>
+<p><span class="h">Please</span>  <span class="h">see</span>  <span class="h">the</span>  <em><span class="h">Coding</span>  <span class="h">and</span> <span class="h">Academic</span>  <span class="h">Integrity</span> <span class="h">Guidelines</span></em> on   <span class="h">Blackboard</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<p>In  <span class="h">summary</span>,  <span class="h">this</span>  is  an <span class="h">assessable</span>  <span class="h">task</span>. If <span class="h">you</span>   <span class="h">use</span>  <span class="h">someone</span>  <span class="h">else</span>&rsquo;s  <span class="h">work</span>  or <span class="h">assistance</span>  to <span class="h">help</span> <span class="h">complete</span>   <span class="h">part</span>  of  <span class="h">the</span>  <span class="h">assignment</span>,  <span class="h">where</span> it&rsquo;s  <span class="h">intended</span> <span class="h">that</span> <span class="h">you</span>   <span class="h">complete</span>  it  <span class="h">yourself</span>,  <span class="h">you</span>  <span class="h">will</span> <span class="h">have</span>  <span class="h">compromised</span> <span class="h">the</span> <span class="h">assessment</span>.   <span class="h">You</span>  <span class="h">will</span>  <span class="h">not</span>  <span class="h">receive</span>  <span class="h">marks</span> <span class="h">for</span>  <span class="h">any</span> <span class="h">parts</span> of   <span class="h">your</span>  <span class="h">submission</span>  <span class="h">that</span>  <span class="h">are</span>  <span class="h">not</span> <span class="h">your</span>  <span class="h">own</span> <span class="h">original</span> <span class="h">work</span>.   <span class="h">Further</span>,  if  <span class="h">you</span>  do  <span class="h">not</span> <em><span class="h">reference</span></em>  <span class="h">any</span> <span class="h">external</span> <span class="h">sources</span>   <span class="h">that</span>  <span class="h">you</span>  <span class="h">use</span>,  <span class="h">you</span>  <span class="h">are</span> <span class="h">committing</span>  <span class="h">plagiarism</span> <span class="h">and</span>/or <span class="h">collusion</span>,   <span class="h">and</span>  <span class="h">penalties</span>  <span class="h">for</span>  <span class="h">academic</span>  <span class="h">misconduct</span> <span class="h">may</span>  <span class="h">apply</span>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<p><span class="h">Curtin</span> <span class="h">also</span> <span class="h">provides</span>   <span class="h">general</span>  <span class="h">advice</span>  on  <span class="h">academic</span>  <span class="h">integrity</span> at  <a href="http://academicintegrity.curtin.edu.au"><span class="h">academicintegrity</span>.<span class="h">curtin</span>.<span class="h">edu</span>.au</a>.<span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+<p><span class="h">The</span> <span class="h">unit</span> <span class="h">coordinator</span>   <span class="h">may</span>  <span class="h">require</span>  <span class="h">you</span>  to  <span class="h">provide</span> an  <span class="h">oral</span> <span class="h">justification</span> of,   or  to  <span class="h">answer</span>  <span class="h">questions</span>  <span class="h">about</span>, <span class="h">any</span>  <span class="h">piece</span> of <span class="h">written</span>   <span class="h">work</span>  <span class="h">submitted</span>  in  <span class="h">this</span>  <span class="h">unit</span>. <span class="h">Your</span>  <span class="h">response</span>(s) <span class="h">may</span> be   <span class="h">referred</span>  to  as  <span class="h">evidence</span>  in an  <span class="h">academic</span> <span class="h">misconduct</span> <span class="h">inquiry</span>.   <span><span aria-hidden="true" class="j"><span>
+̢̧̢̡̠̠̤̤</span></span></span></p>
+             </div> </body>
+            </html>
