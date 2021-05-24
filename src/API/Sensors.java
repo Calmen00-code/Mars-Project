@@ -1,4 +1,4 @@
-package Assignment2.src.API;
+package Assignment2.API;
 
 public class Sensors
 {
