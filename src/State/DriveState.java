@@ -8,7 +8,6 @@ package Assignment2.State;
 
 public class DriveState implements RoverState
 {
-    public static final int TOL = 0.01;
     private RoverContext rover;
 
     public DriveState( RoverContext inRoverContext )
@@ -22,7 +21,7 @@ public class DriveState implements RoverState
         String feedback = "Rover is already moving";
         EngineSystem engine = rover.getEngineSystem();
 
-        if ( engine.getDistanceDriven() == TOL ) {
+        if ( engine.getDistanceDriven() <= 0.00 ) {
             feedback = "Rover stop moving as distance has reached";
             rover.setRoverState( rover.getIdleState() );
         } 
