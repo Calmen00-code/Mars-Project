@@ -7,6 +7,7 @@
 package Assignment2.Observer;
 
 import Assignment2.API.SoilAnalyser;
+import java.util.Base64;
 
 public class AnalyserEvent implements RoverObserver
 {

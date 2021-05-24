@@ -33,7 +33,7 @@ public class EngineEvent implements RoverObserver
             try {
                 // Second argument must be a valid distance
                 distance = Double.parseDouble(parseCommand[1]);
-                if ( engine.getDistanceDrive() <= 0 ) {
+                if ( engine.getDistanceDriven() <= 0 ) {
                     msg += "Rover has reached its destination";
                     rover.stopDrive();
                 } else {
