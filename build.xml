@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Assignment1" basedir="." default="clean-build">
-    <property name="API.dir"       value="API"/>
+<project name="Assignment2" basedir="." default="clean-build">
+    <property name="src.dir"       value="src"/>
     <property name="resources.dir" value="resources"/>
     <property name="build.dir"     value="build"/>
     <property name="dist.dir"      value="dist"/>
-    <property name="main-class"    value="Assignment1.controller.ElectricNetworkDemo"/>
+    <property name="main-class"    value="Assignment2.RoverDemo"/>
     
     <target name="clean">
         <delete dir="${build.dir}"/>
@@ -13,7 +13,7 @@
     
     <target name="compile">
         <mkdir dir="${build.dir}"/>
-        <javac APIdir="${API.dir}" destdir="${build.dir}" includeantruntime="false" debug="true" />
+        <javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime="false" debug="true" />
     </target>
 
     <target name="jar" depends="compile">
