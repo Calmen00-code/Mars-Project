@@ -21,7 +21,7 @@ public class IdleState implements RoverState
     public String startDrive()
     {
         String feedback = "Rover starting to move";
-        EngineSystem engine = rover.getEngineSystem();
+        EngineSystem engine = rover.getEngine();
 
         if ( engine.getDistanceDriven() == TOL )
             feedback = "Rover had already reached its destination";

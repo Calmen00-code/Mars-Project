@@ -21,7 +21,7 @@ public class DriveState implements RoverState
     public String startDrive()
     {
         String feedback = "Rover is already moving";
-        EngineSystem engine = rover.getEngineSystem();
+        EngineSystem engine = rover.getEngine();
 
         if ( engine.getDistanceDriven() <= 0.00 ) {
             feedback = "Rover stop moving as distance has reached";
