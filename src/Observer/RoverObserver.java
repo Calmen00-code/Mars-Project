@@ -3,7 +3,7 @@
  * Purpose: Handling all the observers for the event of rover
  */
 
-package Assignment2.src.Observer;
+package Assignment2.Observer;
 
 public interface RoverObserver
 {

@@ -6,9 +6,9 @@
  * Implements: RoverObserver.java
  */
 
-package Assignment2.src.Observer;
+package Assignment2.Observer;
 
-import Assignment2.src.API;
+import Assignment2.API;
 import java.util.Base64;
 
 public class SensorEvent implements RoverObserver

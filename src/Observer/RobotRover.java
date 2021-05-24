@@ -4,7 +4,7 @@
  * Implements: RobotRoverSubject.java
  */
 
-package Assignment2.src.Observer;
+package Assignment2.Observer;
 
 import java.util.*;
 

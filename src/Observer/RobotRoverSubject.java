@@ -4,7 +4,7 @@
             addition, removal, and update of observer
  */
 
-package Assignment2.src.Observer;
+package Assignment2.Observer;
 
 public interface RobotRoverSubject
 {

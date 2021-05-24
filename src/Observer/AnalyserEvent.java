@@ -4,9 +4,9 @@
  * Implements: RoverObserver.java
  */
 
-package Assignment2.src.Observer;
+package Assignment2.Observer;
 
-import Assignment2.src.API;
+import Assignment2.API;
 
 public class AnalyserEvent implements RoverObserver
 {
