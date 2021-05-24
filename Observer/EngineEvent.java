@@ -13,6 +13,7 @@ public class EngineEvent implements RoverObserver
 
     public EngineEvent( EngineSystem inEngine, RoverContext inRover ) 
     { 
+        // Dependency Injection
         engine = inEngine; 
         rover = inRover;
     }
@@ -20,7 +21,7 @@ public class EngineEvent implements RoverObserver
     @Override
     public String checkCommand( String command )
     {
-        String msg = "", angle = "";
+        String msg = "";
         double distance = 0.0, angle = 0.0;
 
         String[] parseCommand = command.split(" "); // Parse the command
@@ -39,7 +40,7 @@ public class EngineEvent implements RoverObserver
             } catch (Exception e) {
                 throw new EngineEventException("Invalid distance");
             }
-        } else if ( parseCommand[1].equals("T") ) { // Checking for turn
+        } else if ( parseCommand[0].equals("T") ) { // Checking for turn
             try {
                 // Second argument must be a valid angle
                 angle = Double.parseDouble(parseCommand[1]);
