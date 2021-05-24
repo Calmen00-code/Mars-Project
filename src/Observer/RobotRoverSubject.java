@@ -8,7 +8,7 @@ package Assignment2.Observer;
 
 public interface RobotRoverSubject
 {
-    public void addObserver(Observer o);
-    public void removeObserver(Observer o);
+    public void addObserver(RoverObserver o);
+    public void removeObserver(RoverObserver o);
     public void roverUpdate();
 }

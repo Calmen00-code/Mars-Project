@@ -6,8 +6,8 @@
 
 package Assignment2.Observer;
 
-import Assignment2.API;
-import Assignment2.State;
+import Assignment2.API.EngineSystem;
+import Assignment2.State.RoverContext;
 
 public class EngineEvent implements RoverObserver
 {
