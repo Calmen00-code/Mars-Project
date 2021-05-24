@@ -10,12 +10,12 @@ import java.util.*;
 
 public class RobotRover implements RobotRoverSubject
 {
-    private Set<Observer> observers;
+    private Set<Observer> roverObservers;
     private String eventMsg;
 
-    public RobotRover( HashSet<Observer> inObservers )
+    public RobotRover( HashSet<Observer> inRoverObservers )
     { 
-        observers = inObservers;
+        roverObservers = inRoverObservers;
         eventMsg = "";
     }
 
@@ -29,7 +29,7 @@ public class RobotRover implements RobotRoverSubject
     public void roverUpdate( String command )
     {
         // Appending every event message returned by each observers
-        for ( Observer ob : observers )
+        for ( RoverObserver ob : observers )
             eventMsg += ob.checkCommand( command ) + "\n";
     }
 
