@@ -19,7 +19,7 @@ States Description
 
 
 2. "D" and "T" are invalid when:
-> Rover in "S" states (Soil Analysis)
+> Rover in "S" (Soil Analysis)
 
 
 3. Subsequent command can override prev one
@@ -30,5 +30,10 @@ States Description
 4. "T" is valid ONLY when:
 > Stop (Idle)
 > Driving "D"
+
+
+
+
+
 
 5. "P" and "E" ALWAYS VALID

@@ -1,0 +1,5 @@
+updateRover(): This method in the subject will passed the mode in string to all the observer
+		then every observer will check if they are going to handle this event passed as string or not
+
+checkCommand(): Embeded to every observer that implements Observer. It will check the command being passed and decide whether it should take
+		certain action or not. The feedback of the action is returned into the message and append in the eventMsg found in the RobotRover class

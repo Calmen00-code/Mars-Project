@@ -29,7 +29,7 @@ public class RoverContext
 */
 
         // Rover is not moving initially
-        state = isIdle;
+        roverState = isIdle;
 
         // Rover is not reading any data initially
         // FIXME sensorIdle = 

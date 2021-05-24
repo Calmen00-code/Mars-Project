@@ -11,9 +11,9 @@ public class RobotRover implements RobotRoverSubject
     private Set<Observer> observers;
     private String eventMsg;
 
-    public RobotRover() 
+    public RobotRover( HashSet<Observer> inObservers )
     { 
-        observers = new HashSet<>();
+        observers = inObservers;
         eventMsg = "";
     }
 
@@ -26,6 +26,7 @@ public class RobotRover implements RobotRoverSubject
     @Override
     public void roverUpdate( String command )
     {
+        // Appending every event message returned by each observers
         for ( Observer ob : observers )
             eventMsg += ob.checkCommand( command ) + "\n";
     }
