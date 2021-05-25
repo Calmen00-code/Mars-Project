@@ -10,6 +10,9 @@ package Assignment2.State;
 public interface AnalysisState implements RoverState
 {
     @Override
-    public String startDrive()
+    public String startDrive() throws StateException
     {
-        
+        throw new StateException(
+                "Rover cannot move while performing soil analysis");
+        return "";
+    }
