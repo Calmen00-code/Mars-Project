@@ -9,5 +9,5 @@ public interface RoverState
 {
     public String startDrive() throws StateException;
     public String stopDrive();
-    public void startAnalyse() throws StateException;
+    public String startAnalyse() throws StateException;
 }
