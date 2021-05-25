@@ -13,6 +13,7 @@ public class RoverContext
     private IdleState isIdle;
     private AnalysisState isAnalyse;
     private EngineSystem engine;
+    private SoilAnalyser analyser;
 /*  
     FIXME 
     private SensorOnState sensorOn;
@@ -46,10 +47,18 @@ public class RoverContext
         roverState = newRoverState;
     }
 
-    public void startDrive()
+    public String startDrive()
     {
-        roverState.startDrive();    // State Transition
-        engine.startDriving();      // Actual stop
+        String feedback = "";
+
+        try { 
+            roverState.startDrive();    // State Transition
+            engine.startDriving();      // Actual stop
+        } catch (StateException e) { 
+            feedback = e.getMessage(); 
+        }
+
+        return feedback;
     }
 
     public void stopDrive()
@@ -58,7 +67,22 @@ public class RoverContext
         engine.stopDriving();       // Actual stop
     }
 
+    public String startAnalyse()
+    {
+        String feedback = "";
+
+        try { 
+            roverState.startAnalyse();  // State Transition
+            analyser.startAnalysis();   // Start analysis
+        } catch (StateException e) { 
+            feedback = e.getMessage(); 
+        }
+
+        return feedback;
+    }
+
     public DriveState getDriveState() { return isDrive; }
     public IdleState getIdleState() { return isIdle; }
+    public AnalysisState getAnalysisState() { return isAnalysis; }
     public EngineSystem getEngine() { return engine; }
 }
