@@ -11,6 +11,7 @@ public class RoverContext
 {
     private DriveState isDrive;
     private IdleState isIdle;
+    private AnalysisState isAnalyse;
     private EngineSystem engine;
 /*  
     FIXME 
@@ -25,6 +26,7 @@ public class RoverContext
         // Initialising all states to this current object
         isDrive = new DriveState(this);
         isIdle = new IdleState(this);
+        isAnalyse = new AnalysisState(this);
         engine = new EngineSystem();
 /*
         FIXME
@@ -46,14 +48,14 @@ public class RoverContext
 
     public void startDrive()
     {
-        roverState.startDrive();
-        engine.startDriving();
+        roverState.startDrive();    // State Transition
+        engine.startDriving();      // Actual stop
     }
 
     public void stopDrive()
     {
-        roverState.stopDrive();
-        engine.stopDriving();
+        roverState.stopDrive();     // State Transition
+        engine.stopDriving();       // Actual stop
     }
 
     public DriveState getDriveState() { return isDrive; }
