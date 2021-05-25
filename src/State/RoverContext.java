@@ -22,13 +22,15 @@ public class RoverContext
 
     private RoverState roverState;
 
-    public RoverContext()
+    public RoverContext( EngineSystem inEngine, 
+                         SoilAnalyser inAnalyser )
     {
         // Initialising all states to this current object
         isDrive = new DriveState(this);
         isIdle = new IdleState(this);
         isAnalyse = new AnalysisState(this);
-        engine = new EngineSystem();
+        engine = inEngine;
+        analyser = inAnalyser;
 /*
         FIXME
         sensorOn = new SensorOnState(this);
