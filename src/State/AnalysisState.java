@@ -7,7 +7,7 @@
 
 package Assignment2.State;
 
-public interface AnalysisState implements RoverState
+public class AnalysisState implements RoverState
 {
     @Override
     public String startDrive() throws StateException
