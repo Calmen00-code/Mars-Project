@@ -21,7 +21,6 @@ public class AnalysisState implements RoverState
     {
         throw new StateException(
                 "Rover cannot move while performing soil analysis");
-        return "";
     }
 
     @Override
