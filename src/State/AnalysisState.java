@@ -16,3 +16,19 @@ public interface AnalysisState implements RoverState
                 "Rover cannot move while performing soil analysis");
         return "";
     }
+
+    @Override
+    public String stopDrive()
+    {
+        String feedback = "Rover stopped moving";
+        rover.setRoverState( rover.getIdleState() );
+        return feedback;
+    }
+
+    @Override
+    public void startAnalyse() throws StateException
+    {  
+        throw new StateException(
+                "! Rover is already performing analysing");
+    }
+}
