@@ -9,6 +9,13 @@ package Assignment2.State;
 
 public class AnalysisState implements RoverState
 {
+    private RoverContext rover;
+
+    public AnalysisState( RoverContext inRoverContext )
+    {
+        rover = inRoverContext;
+    }
+
     @Override
     public String startDrive() throws StateException
     {
