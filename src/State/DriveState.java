@@ -39,9 +39,9 @@ public class DriveState implements RoverState
     }
 
     @Override
-    public String startAnalyse() 
+    public void startAnalyse() throws StateException
     {  
-        String feedback = "! Cannot do analysing when rover is moving";
-        throw new 
+        throw new StateException(
+                "! Cannot do analysing when rover is moving");
     }
 }
