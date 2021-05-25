@@ -41,7 +41,7 @@ public class EngineEvent implements RoverObserver
                     rover.startDrive();
                 }
             } catch (Exception e) {
-                throw new ObserverException("Invalid distance");
+                throw new ObserverException("! Invalid distance");
             }
         } else if ( parseCommand[0].equals("T") ) { // Checking for turn
             try {
@@ -50,9 +50,9 @@ public class EngineEvent implements RoverObserver
                 if ( angle >= -180 && angle <= 180 )
                     msg += "Rover turn for " + angle + "degree";
                 else
-                    throw new ObserverException("Invalid angle");
+                    throw new ObserverException("! Invalid angle");
             } catch (Exception e) {
-                throw new ObserverException("Invalid angle");
+                throw new ObserverException("! Invalid angle");
             }
         }
         return msg;
