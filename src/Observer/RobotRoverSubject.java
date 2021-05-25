@@ -10,5 +10,5 @@ public interface RobotRoverSubject
 {
     public void addObserver(RoverObserver o);
     public void removeObserver(RoverObserver o);
-    public void roverUpdate(String command);
+    public void roverUpdate(String command) throws ObserverException;
 }

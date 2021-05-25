@@ -26,7 +26,7 @@ public class RobotRover implements RobotRoverSubject
     public void removeObserver( RoverObserver o ) { roverObservers.remove(o); }
 
     @Override
-    public void roverUpdate( String command )
+    public void roverUpdate( String command ) throws ObserverException
     {
         // Appending every event message returned by each observers
         for ( RoverObserver ob : roverObservers )

@@ -22,7 +22,7 @@ public class EngineEvent implements RoverObserver
     }
 
     @Override
-    public String checkCommand( String command )
+    public String checkCommand( String command ) throws ObserverException
     {
         String msg = "";
         double distance = 0.0, angle = 0.0;
@@ -41,7 +41,7 @@ public class EngineEvent implements RoverObserver
                     rover.startDrive();
                 }
             } catch (Exception e) {
-                throw new EngineEventException("Invalid distance");
+                throw new ObserverException("Invalid distance");
             }
         } else if ( parseCommand[0].equals("T") ) { // Checking for turn
             try {
@@ -50,9 +50,9 @@ public class EngineEvent implements RoverObserver
                 if ( angle >= -180 && angle <= 180 )
                     msg += "Rover turn for " + angle + "degree";
                 else
-                    throw new EngineEventException("Invalid angle");
+                    throw new ObserverException("Invalid angle");
             } catch (Exception e) {
-                throw new EngineEventException("Invalid angle");
+                throw new ObserverException("Invalid angle");
             }
         }
         return msg;
