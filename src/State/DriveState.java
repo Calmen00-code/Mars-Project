@@ -37,4 +37,11 @@ public class DriveState implements RoverState
         rover.setRoverState( rover.getIdleState() );
         return feedback;
     }
+
+    @Override
+    public String startAnalyse() 
+    {  
+        String feedback = "! Cannot do analysing when rover is moving";
+        throw new 
+    }
 }
