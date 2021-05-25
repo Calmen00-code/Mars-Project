@@ -18,7 +18,7 @@ public class IdleState implements RoverState
     }
 
     @Override
-    public String startDrive()
+    public String startDrive() throws StateException
     {
         String feedback = "Rover starting to move";
         EngineSystem engine = rover.getEngine();
