@@ -20,11 +20,21 @@ public class RoverTest
         RoverContext rover = new RoverContext( engine, analyser );
 
         System.out.println("=========================================");
-        System.out.println("TEST Cases for Moving (STATE)\n");
+        System.out.println("TEST Cases for Moving and Idle (STATE)\n");
         System.out.print("From Idle to Moving: ");
         try { output = rover.startDrive(); }
         catch( Exception e ) { output = e.getMessage(); }
         if ( output.equals("Rover starting to move") )
+            System.out.println("PASSED");
+        else {
+            System.out.println("FAILED");
+            System.out.println("Message Returned: " + output);
+        }
+
+        System.out.print("From Moving to Idle: ");
+        try { output = rover.stopDrive(); }
+        catch( Exception e ) { output = e.getMessage(); }
+        if ( output.equals("Rover stopped moving") )
             System.out.println("PASSED");
         else {
             System.out.println("FAILED");
@@ -59,6 +69,16 @@ public class RoverTest
         try { output = rover.startAnalyse(); }                  // FIXME
         catch( Exception e ) { output = e.getMessage(); }
         if ( output.equals("Rover starting to do soil analysis") )         // FIXME
+            System.out.println("PASSED");
+        else {
+            System.out.println("FAILED");
+            System.out.println("Message Returned: " + output);
+        }
+
+        System.out.print("From Analysis to Driving: ");              // FIXME
+        try { output = rover.startDrive(); }                  // FIXME
+        catch( Exception e ) { output = e.getMessage(); }
+        if ( output.equals("! Rover cannot move while performing soil analysis") )         // FIXME
             System.out.println("PASSED");
         else {
             System.out.println("FAILED");
