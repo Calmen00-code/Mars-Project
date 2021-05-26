@@ -50,18 +50,13 @@ public class RoverContext
         roverState = newRoverState;
     }
 
-    public String startDrive()
+    public void startDrive() throws StateException
     {
         String feedback = "";
 
-        try { 
-            roverState.startDrive();    // State Transition
-            engine.startDriving();      // Actual stop
-        } catch (StateException e) { 
-            feedback = e.getMessage(); 
-        }
-
-        return feedback;
+        roverState.startDrive();    // State Transition
+        engine.startDriving();      // Actual stop
+        feedback = e.getMessage(); 
     }
 
     public void stopDrive()
