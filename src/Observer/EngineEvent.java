@@ -33,15 +33,13 @@ public class EngineEvent implements RoverObserver
             try {
                 // Second argument must be a valid distance
                 distance = Double.parseDouble(parseCommand[1]);
-                if ( engine.getDistanceDriven() <= 0 ) {
-                    msg += "Rover has reached its destination";
-                    rover.stopDrive();
-                } else {
-                    msg += "Drive for " + distance;
-                    rover.startDrive();
-                }
-            } catch (Exception e) {
+                rover.startDrive();
+                msg += "Drive for " + distance;
+            } catch (NumberFormatException e) {
                 throw new ObserverException("! Invalid distance");
+            } catch (StateException e) {
+                msg += e.getMessage();
+                throw new ObserverException(msg);
             }
         } else if ( parseCommand[0].equals("T") ) { // Checking for turn
             try {
@@ -51,7 +49,7 @@ public class EngineEvent implements RoverObserver
                     msg += "Rover turn for " + angle + "degree";
                 else
                     throw new ObserverException("! Invalid angle");
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
                 throw new ObserverException("! Invalid angle");
             }
         }
