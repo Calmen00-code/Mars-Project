@@ -104,6 +104,10 @@ public class RoverTest
 
         System.out.println("=========================================");
         System.out.println("TEST Cases for Analyse Event (Observer)\n");   // FIXME
+
+        setUp();
+        idleToMoveObs();
+        tearDown();
  
         // Make rover to idle and test for analysis again
         rover.setRoverState( rover.getIdleState() );            // FIXME
