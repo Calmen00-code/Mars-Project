@@ -21,6 +21,8 @@ public class RoverTest
     private static RoverObserver sensorEvent;
     private static RoverObserver engineEvent;
     private static RoverObserver analyserEvent;
+    private static RobotRover robot;        // Controller for Observer Pattern
+    private static Set<RoverObserver> roverObs;
 
     public static void setUp()
     {
@@ -34,6 +36,13 @@ public class RoverTest
         engineEvent = new EngineEvent( engine, rover );
         Sensors sensor = new Sensors();
         sensorEvent = new SensorEvent( sensor );
+        roverObs = new HashSet<Observers>();
+        robot = new RobotRover( roverObs );
+
+        // Adding all event as observer
+        robot.addObserver( sensorEvent );
+        robot.addObserver( engineEvent );
+        robot.addObserver( analyseEvent );
     }
 
     public static void tearDown()
@@ -73,7 +82,7 @@ public class RoverTest
 /* ------------------------------------------------------------------------------------------------------ */
 
         System.out.println("=========================================");
-        System.out.println("TEST Cases for Soil Analysis (STATE)\n");   // FIXME
+        System.out.println("TEST Cases for Soil Analysis (STATE)\n");
 
         setUp();
         moveToAnalysis();
