@@ -20,14 +20,14 @@ public class RoverTest
         RoverContext rover = new RoverContext( engine, analyser );
 
         System.out.println("=========================================\n");
-        System.out.println("TEST Moving Successful: ");
+        System.out.print("TEST Moving Successful: ");
         try { output = rover.startDrive(); }
         catch( Exception e ) { output = e.getMessage(); }
-        if ( output.equals("Rover is already moving") )
-            System.out.println("PASSED");
+        if ( output.equals("Rover starting to move") )
+            System.out.println("PASSED\n");
         else {
             System.out.println("FAILED");
-            System.out.println("Message Returned: " + output);
+            System.out.println("Message Returned: " + output + "\n");
         }
         
     }
