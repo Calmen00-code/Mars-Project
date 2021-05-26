@@ -12,10 +12,16 @@ import Assignment2.API.*;
 
 public class RoverTest
 {
-    private static String output;
+    private static String output; 
     private static EngineSystem engine;
     private static SoilAnalyser analyser;
-    private static RoverContext rover;
+    private static RoverContext rover;      // Controller for State Pattern
+    private static Sensors sensor;
+    private static AnalysisState analyseState;
+    private static EngineSystem engine;
+    private static RoverObserver sensorEvent;
+    private static RoverObserver engineEvent;
+    private static RoverObserver analyserEvent;
 
     public static void setUp()
     {
@@ -23,6 +29,12 @@ public class RoverTest
         engine = new EngineSystem();
         analyser = new SoilAnalyser();
         rover = new RoverContext( engine, analyser );
+        analyseState = new AnalyseState( rover );
+        analyserEvent = new AnalyserEvent( analyser, analyseState );
+        engine = new EngineSystem();
+        engineEvent = new EngineEvent( engine, rover );
+        Sensors sensor = new Sensors();
+        sensorEvent = new SensorEvent( sensor );
     }
 
     public static void tearDown()
