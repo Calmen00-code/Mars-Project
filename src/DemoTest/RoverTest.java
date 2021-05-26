@@ -27,6 +27,7 @@ public class RoverTest
 
     public static void tearDown()
     {
+        output = null;
         engine = null;
         analyser = null;
         rover = null;
@@ -41,25 +42,14 @@ public class RoverTest
         idleToMove();
         tearDown();
 
-        System.out.print("From Moving to Moving: ");
-        try { output = rover.startDrive(); }
-        catch( Exception e ) { output = e.getMessage(); }
-        if ( output.equals("Rover is already moving") )
-            System.out.println("PASSED");
-        else {
-            System.out.println("FAILED");
-            System.out.println("Message Returned: " + output);
-        }
+        setUp();
+        moveToMove();
+        tearDown();
 
-        System.out.print("From Moving to Idle: ");
-        try { output = rover.stopDrive(); }
-        catch( Exception e ) { output = e.getMessage(); }
-        if ( output.equals("Rover stopped moving") )
-            System.out.println("PASSED");
-        else {
-            System.out.println("FAILED");
-            System.out.println("Message Returned: " + output);
-        }
+        setUp();
+        moveToIdle();
+        tearDown();
+
  
         System.out.print("Rover reached destination: ");
         engine.setDistance(0);
@@ -180,9 +170,42 @@ public class RoverTest
     public static void idleToMove()
     {
         System.out.print("From Idle to Moving: ");
+
         try { output = rover.startDrive(); }
-        catch( Exception e ) { output = e.getMessage(); }
+        catch( StateException e ) { output = e.getMessage(); }
         if ( output.equals("Rover starting to move") )
+            System.out.println("PASSED");
+        else {
+            System.out.println("FAILED");
+            System.out.println("Message Returned: " + output);
+        }
+    }
+
+    public static void moveToMove()
+    {
+        System.out.print("From Moving to Moving: ");
+        
+        try { 
+            rover.startDrive(); 
+            output = rover.startDrive(); 
+        } catch( StateException e ) { output = e.getMessage(); }
+        if ( output.equals("Rover is already moving") )
+            System.out.println("PASSED");
+        else {
+            System.out.println("FAILED");
+            System.out.println("Message Returned: " + output);
+        }
+    }
+
+    public static void moveToIdle()
+    {
+        System.out.print("From Moving to Idle: ");
+
+        try { 
+            rover.startDrive();
+            output = rover.stopDrive(); 
+        } catch( Exception e ) { output = e.getMessage(); }
+        if ( output.equals("Rover stopped moving") )
             System.out.println("PASSED");
         else {
             System.out.println("FAILED");
