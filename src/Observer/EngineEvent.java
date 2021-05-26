@@ -38,7 +38,7 @@ public class EngineEvent implements RoverObserver
                 // Second argument must be a valid distance
                 distance = Double.parseDouble(parseCommand[1]);
                 rover.startDrive();
-                msg += "Drive for " + distance;
+                msg += "Drive for " + distance + "km";
             } catch (NumberFormatException e) {
                 throw new ObserverException("! Invalid distance");
             } catch (StateException e) {
