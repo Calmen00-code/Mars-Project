@@ -31,16 +31,6 @@ public class RoverTest
             System.out.println("Message Returned: " + output);
         }
 
-        System.out.print("From Moving to Idle: ");
-        try { output = rover.stopDrive(); }
-        catch( Exception e ) { output = e.getMessage(); }
-        if ( output.equals("Rover stopped moving") )
-            System.out.println("PASSED");
-        else {
-            System.out.println("FAILED");
-            System.out.println("Message Returned: " + output);
-        }
- 
         System.out.print("From Moving to Moving: ");
         try { output = rover.startDrive(); }
         catch( Exception e ) { output = e.getMessage(); }
@@ -51,11 +41,21 @@ public class RoverTest
             System.out.println("Message Returned: " + output);
         }
 
-        System.out.print("Rover reached destination: ");
-        engine.setDistance(0.0);
+        System.out.print("From Moving to Idle: ");
         try { output = rover.stopDrive(); }
         catch( Exception e ) { output = e.getMessage(); }
-        if ( output.equals("Rover stop moving as distance has reached") )
+        if ( output.equals("Rover stopped moving") )
+            System.out.println("PASSED");
+        else {
+            System.out.println("FAILED");
+            System.out.println("Message Returned: " + output);
+        }
+ 
+        System.out.print("Rover reached destination: ");
+        engine.setDistance(0);
+        try { output = rover.startDrive(); }
+        catch( Exception e ) { output = e.getMessage(); }
+        if ( output.equals("! Rover had already reached its destination") )
             System.out.println("PASSED\n");
         else {
             System.out.println("FAILED");
