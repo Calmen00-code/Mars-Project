@@ -41,7 +41,7 @@ public class IdleState implements RoverState
     public String startAnalyse() throws StateException
     {
         String feedback = "Rover starting to do soil analysis";
-        rover.setRoverState( rover.getAnalysisState() );
+        feedback = rover.setRoverState( rover.getAnalysisState() );
         return feedback;
     }
 }
