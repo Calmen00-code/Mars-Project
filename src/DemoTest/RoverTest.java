@@ -18,7 +18,6 @@ public class RoverTest
     private static RoverContext rover;      // Controller for State Pattern
     private static Sensors sensor;
     private static AnalysisState analyseState;
-    private static EngineSystem engine;
     private static RoverObserver sensorEvent;
     private static RoverObserver engineEvent;
     private static RoverObserver analyserEvent;
@@ -29,7 +28,7 @@ public class RoverTest
         engine = new EngineSystem();
         analyser = new SoilAnalyser();
         rover = new RoverContext( engine, analyser );
-        analyseState = new AnalyseState( rover );
+        analyseState = new AnalysisState( rover );
         analyserEvent = new AnalyserEvent( analyser, analyseState );
         engine = new EngineSystem();
         engineEvent = new EngineEvent( engine, rover );
@@ -43,6 +42,11 @@ public class RoverTest
         engine = null;
         analyser = null;
         rover = null;
+        sensor = null;
+        analyseState = null;
+        sensorEvent = null;
+        engineEvent = null;
+        analyseEvent = null;
     }
 
     public static void main(String[] args)
