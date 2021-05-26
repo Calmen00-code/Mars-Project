@@ -3,7 +3,7 @@
  * Purpose: Checking the command passed from Earth
  */
 
-public class ValdiateCommand
+public class ValidateCommand
 {
     public boolean commandExist( String command )
     {

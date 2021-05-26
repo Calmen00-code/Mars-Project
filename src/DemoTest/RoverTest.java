@@ -22,7 +22,7 @@ public class RoverTest
     private static RoverObserver engineEvent;
     private static RoverObserver analyserEvent;
     private static RobotRover robot;        // Controller for Observer Pattern
-    private static Set<RoverObserver> roverObs;
+    private static HashSet<RoverObserver> roverObs;
 
     public static void setUp()
     {
@@ -34,15 +34,15 @@ public class RoverTest
         analyserEvent = new AnalyserEvent( analyser, analyseState );
         engine = new EngineSystem();
         engineEvent = new EngineEvent( engine, rover );
-        Sensors sensor = new Sensors();
+        sensor = new Sensors();
         sensorEvent = new SensorEvent( sensor );
-        roverObs = new HashSet<Observers>();
+        roverObs = new HashSet<RoverObserver>();
         robot = new RobotRover( roverObs );
 
         // Adding all event as observer
         robot.addObserver( sensorEvent );
         robot.addObserver( engineEvent );
-        robot.addObserver( analyseEvent );
+        robot.addObserver( analyserEvent );
     }
 
     public static void tearDown()
@@ -268,14 +268,14 @@ public class RoverTest
 
     public static void idleToMoveObs()
     {
-        System.out.print("From Idle to Moving: ");          // FIXME
+        System.out.print("From Idle to Moving: ");
 
         try { 
-            rover.startDrive(); 
-            output = rover.startAnalyse();                  // FIXME
+            robot.roverUpdate( "D 12.5" );
+            output = robot.getEventMsg();
         } catch( Exception e ) { output = e.getMessage(); }
 
-        if ( output.equals("! Cannot do analysing when rover is moving") ) // FIXME
+        if ( output.equals("Drive for 12.5km") )
             System.out.println("PASSED");
         else {
             System.out.println("FAILED");
