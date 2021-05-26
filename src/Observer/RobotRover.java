@@ -30,7 +30,7 @@ public class RobotRover implements RobotRoverSubject
     {
         // Appending every event message returned by each observers
         for ( RoverObserver ob : roverObservers )
-            eventMsg += ob.checkCommand( command ) + "\n";
+            eventMsg += ob.doCommand( command ) + "\n";
     }
 
     public String getEventMsg() { return eventMsg; }

@@ -32,6 +32,9 @@ public class EngineEvent implements RoverObserver
 
         if ( parseCommand[0].equals("D") ) { // Checking for drive
             try {
+                if ( parseCommand.length < 2 )
+                    throw new ObserverException("! Invalid distance");
+
                 // Second argument must be a valid distance
                 distance = Double.parseDouble(parseCommand[1]);
                 rover.startDrive();
