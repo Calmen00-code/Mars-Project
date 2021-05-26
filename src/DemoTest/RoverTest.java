@@ -50,70 +50,30 @@ public class RoverTest
         moveToIdle();
         tearDown();
 
- 
-        System.out.print("Rover reached destination: ");
-        engine.setDistance(0);
-        try { output = rover.startDrive(); }
-        catch( Exception e ) { output = e.getMessage(); }
-        if ( output.equals("! Rover had already reached its destination") )
-            System.out.println("PASSED\n");
-        else {
-            System.out.println("FAILED");
-            System.out.println("Message Returned: " + output + "\n");
-        }
+        setUp();
+        reachDest();
+        tearDown(); 
 
 /* ------------------------------------------------------------------------------------------------------ */
 
         System.out.println("=========================================");
         System.out.println("TEST Cases for Soil Analysis (STATE)\n");   // FIXME
-        System.out.print("From Moving to Analysis: ");          // FIXME
-        
-        // Give some distance otherwise the rover cannot drive
-        engine.setDistance(1);  
-        try { 
-            rover.startDrive(); 
-            output = rover.startAnalyse();                  // FIXME
-        } catch( Exception e ) { output = e.getMessage(); }
 
-        if ( output.equals("! Cannot do analysing when rover is moving") ) // FIXME
-            System.out.println("PASSED");
-        else {
-            System.out.println("FAILED");
-            System.out.println("Message Returned: " + output);
-        }
+        setUp();
+        moveToAnalysis();
+        tearDown(); 
+
+        setUp();
+        idleToAnalysis();
+        tearDown(); 
  
-        // Make rover to idle and test for analysis again
-        rover.setRoverState( rover.getIdleState() );            // FIXME
-        System.out.print("From Idle to Analysis: ");              // FIXME
-        try { output = rover.startAnalyse(); }                  // FIXME
-        catch( Exception e ) { output = e.getMessage(); }
-        if ( output.equals("Rover starting to do soil analysis") )         // FIXME
-            System.out.println("PASSED");
-        else {
-            System.out.println("FAILED");
-            System.out.println("Message Returned: " + output);
-        }
+        setUp();
+        analysisToMove();
+        tearDown(); 
 
-        System.out.print("From Analysis to Driving: ");              // FIXME
-        try { output = rover.startDrive(); }                  // FIXME
-        catch( Exception e ) { output = e.getMessage(); }
-        if ( output.equals("! Rover cannot move while performing soil analysis") )         // FIXME
-            System.out.println("PASSED");
-        else {
-            System.out.println("FAILED");
-            System.out.println("Message Returned: " + output);
-        }
-
-        System.out.print("From Analysis to Analysis: ");          // FIXME
-        try { output = rover.startAnalyse(); }                 // FIXME
-        catch( Exception e ) { output = e.getMessage(); }
-        if ( output.equals("! Rover is already performing analysis") ) // FIXME
-            System.out.println("PASSED\n");
-        else {
-            System.out.println("FAILED");
-            System.out.println("Message Returned: " + output + "\n");
-        }
-
+        setUp();
+        analysisToAnalysis();
+        tearDown();
 
 /* ------------------------------------------------------------------------------------------------------ */
 
@@ -210,6 +170,88 @@ public class RoverTest
         else {
             System.out.println("FAILED");
             System.out.println("Message Returned: " + output);
+        }
+    }
+
+    public static void reachDest()
+    {
+        System.out.print("Rover reached destination: ");
+
+        engine.setDistance(0);
+        try { output = rover.startDrive(); }
+        catch( Exception e ) { output = e.getMessage(); }
+        if ( output.equals("! Rover had already reached its destination") )
+            System.out.println("PASSED\n");
+        else {
+            System.out.println("FAILED");
+            System.out.println("Message Returned: " + output + "\n");
+        }
+    }
+
+    public static void moveToAnalysis()
+    {
+        System.out.print("From Moving to Analysis: ");          // FIXME
+        
+        // Give some distance otherwise the rover cannot drive
+        engine.setDistance(1);  
+        try { 
+            rover.startDrive(); 
+            output = rover.startAnalyse();                  // FIXME
+        } catch( Exception e ) { output = e.getMessage(); }
+
+        if ( output.equals("! Cannot do analysing when rover is moving") ) // FIXME
+            System.out.println("PASSED");
+        else {
+            System.out.println("FAILED");
+            System.out.println("Message Returned: " + output);
+        }
+    }
+
+    public static void idleToAnalysis()
+    {
+        System.out.print("From Idle to Analysis: ");              // FIXME
+
+        // Make rover to idle and test for analysis again
+        rover.setRoverState( rover.getIdleState() );            // FIXME
+        try { output = rover.startAnalyse(); }                  // FIXME
+        catch( Exception e ) { output = e.getMessage(); }
+        if ( output.equals("Rover starting to do soil analysis") )         // FIXME
+            System.out.println("PASSED");
+        else {
+            System.out.println("FAILED");
+            System.out.println("Message Returned: " + output);
+        }
+    }
+
+    public static void analysisToMove()
+    {
+        System.out.print("From Analysis to Driving: ");              // FIXME
+
+        try { 
+            rover.startAnalyse();
+            output = rover.startDrive(); // FIXME
+        } catch( Exception e ) { output = e.getMessage(); }
+        if ( output.equals("! Rover cannot move while performing soil analysis") )         // FIXME
+            System.out.println("PASSED");
+        else {
+            System.out.println("FAILED");
+            System.out.println("Message Returned: " + output);
+        }
+    }
+
+    public static void analysisToAnalysis()
+    {
+        System.out.print("From Analysis to Analysis: ");          // FIXME
+
+        try { 
+            rover.startAnalyse();
+            output = rover.startAnalyse(); // FIXME
+        } catch( Exception e ) { output = e.getMessage(); }
+        if ( output.equals("! Rover is already performing analysis") ) // FIXME
+            System.out.println("PASSED\n");
+        else {
+            System.out.println("FAILED");
+            System.out.println("Message Returned: " + output + "\n");
         }
     }
 }
