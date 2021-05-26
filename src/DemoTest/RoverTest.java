@@ -62,11 +62,19 @@ public class RoverTest
             System.out.println("Message Returned: " + output + "\n");
         }
 
+/* ------------------------------------------------------------------------------------------------------ */
+
         System.out.println("=========================================");
         System.out.println("TEST Cases for Soil Analysis (STATE)\n");   // FIXME
         System.out.print("From Moving to Analysis: ");          // FIXME
-        try { output = rover.startAnalyse(); }                 // FIXME
-        catch( Exception e ) { output = e.getMessage(); }
+        
+        // Give some distance otherwise the rover cannot drive
+        engine.setDistance(1);  
+        try { 
+            rover.startDrive(); 
+            output = rover.startAnalyse();                  // FIXME
+        } catch( Exception e ) { output = e.getMessage(); }
+
         if ( output.equals("! Cannot do analysing when rover is moving") ) // FIXME
             System.out.println("PASSED");
         else {
