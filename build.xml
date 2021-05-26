@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Assignment2" basedir="." default="clean-build">
     <property name="src.dir"       value="src"/>
+    <property name="resources.dir" value="resources"/>
     <property name="build.dir"     value="build"/>
     <property name="dist.dir"      value="dist"/>
-    <property name="main-class"    value="Assignment2.RoverTest"/>
+    <property name="main-class"    value="Assignment2.DemoTest.RoverTest"/>
     
     <target name="clean">
         <delete dir="${build.dir}"/>
@@ -12,10 +13,7 @@
     
     <target name="compile">
         <mkdir dir="${build.dir}"/>
-        <javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime="false" debug="true">
-            <exclude name="**/UnitTestState.java"/>
-            <exclude name="**/UnitTestTwo.java"/>
-        </javac>
+        <javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime="false" debug="true" />
     </target>
 
     <target name="jar" depends="compile">
@@ -25,6 +23,9 @@
                 <attribute name="Main-Class" value="${main-class}"/>
             </manifest>
         </jar>
+        <copy todir="${dist.dir}">
+            <fileset dir="${resources.dir}"/>
+        </copy>
     </target>
     
     <target name="run" depends="jar">

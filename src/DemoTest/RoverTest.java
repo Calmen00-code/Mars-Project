@@ -3,6 +3,8 @@
  * Purpose: Testing the value for the Rover Demonstration
  */
 
+package Assignment2.DemoTest;
+
 import java.util.*;
 import Assignment2.State.*;
 import Assignment2.Observer.*;
