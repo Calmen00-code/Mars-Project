@@ -15,7 +15,12 @@ public class AnalyserEvent implements RoverObserver
     private SoilAnalyser analyser;
     private AnalysisState analyseState;
 
-    public AnalyserEvent( SoilAnalyser inAnalyser ) { analyser = inAnalyser; }
+    public AnalyserEvent( SoilAnalyser inAnalyser, 
+                    AnalysisState inAnalyseState ) 
+    { 
+        analyser = inAnalyser; 
+        analyseState = inAnalyseState;
+    }
 
     @Override
     public String checkCommand( String command )
