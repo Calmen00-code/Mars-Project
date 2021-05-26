@@ -20,13 +20,15 @@ public class DriveState implements RoverState
     @Override
     public String startDrive() throws StateException
     {
-        String feedback = "Rover is already moving";
+        String feedback = "Rover starting to move";
         EngineSystem engine = rover.getEngine();
 
-        if ( engine.getDistanceDriven() <= 0.00 ) {
-            feedback = "Rover stop moving as distance has reached";
+        if ( engine.getDistanceDriven() <= 0 ) {
             rover.setRoverState( rover.getIdleState() );
-        } 
+            throw new StateException("! Rover had already reached its destination");
+        }
+        else
+            rover.setRoverState( rover.getDriveState() );
         return feedback;
     }
 
