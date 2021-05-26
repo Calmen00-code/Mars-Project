@@ -52,6 +52,7 @@ public class RoverTest
         }
 
         System.out.print("Rover reached destination: ");
+        engine.setDistance(0.0);
         try { output = rover.stopDrive(); }
         catch( Exception e ) { output = e.getMessage(); }
         if ( output.equals("Rover stop moving as distance has reached") )
