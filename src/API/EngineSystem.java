@@ -2,7 +2,7 @@ package Assignment2.API;
 
 public class EngineSystem
 {
-    private double distance;
+    private double distance = 1.0;
 
     /** 
      * Begins driving forward. The effect is *not* to drive a fixed distance, but 
