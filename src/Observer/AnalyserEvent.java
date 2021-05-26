@@ -7,11 +7,13 @@
 package Assignment2.Observer;
 
 import Assignment2.API.SoilAnalyser;
+import Assignment2.API.
 import java.util.Base64;
 
 public class AnalyserEvent implements RoverObserver
 {
     private SoilAnalyser analyser;
+    private AnalysisState analyseState;
 
     public AnalyserEvent( SoilAnalyser inAnalyser ) { analyser = inAnalyser; }
 
@@ -20,8 +22,13 @@ public class AnalyserEvent implements RoverObserver
     {
         String msg = "";
         if ( command.equals("S") ) {
-            analyser.startAnalysis();
-            msg = "S " + Base64.getEncoder().encodeToString(analyser.pollAnalysis());
+            try {
+                analyseState.startAnalyse();
+                analyser.startAnalysis();
+                msg = "S " + Base64.getEncoder().encodeToString(analyser.pollAnalysis());
+            } catch (Exception e) {
+                msg = e.getMessage();
+            }
         }
         return msg;
     }
