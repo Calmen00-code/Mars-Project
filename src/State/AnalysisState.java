@@ -35,6 +35,6 @@ public class AnalysisState implements RoverState
     public String startAnalyse() throws StateException
     {  
         throw new StateException(
-                "! Rover is already performing analysing");
+                "! Rover is already performing analysis");
     }
 }
