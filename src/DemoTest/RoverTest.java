@@ -25,8 +25,10 @@ public class RoverTest
         catch( Exception e ) { output = e.getMessage(); }
         if ( output.equals("Rover is already moving") )
             System.out.println("PASSED");
-        else
+        else {
             System.out.println("FAILED");
+            System.out.println("Message Returned: " + output);
+        }
         
     }
 }
