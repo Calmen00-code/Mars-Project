@@ -40,5 +40,7 @@ public class UnitTestState
     @Test
     public void testAnalysisState()
     {
+        rover.startDrive();
+        
     }
 }
