@@ -4,10 +4,12 @@
  */
 
 import org.junit.*;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 import static org.junit.Assert.*;
 import java.io.*;
 import Assignment2.API.EngineSystem;
-import Assignmetn2.API.SoilAnalyser;
+import Assignment2.API.SoilAnalyser;
 
 public class UnitTestState
 {
@@ -38,9 +40,9 @@ public class UnitTestState
     }
 
     @Test
-    public void testAnalysisState()
+    public void testMoveSuccess()
     {
-        rover.startDrive();
-        
+        output = rover.startDrive();
+        assertEquals("Rover starting to move", output);
     }
 }

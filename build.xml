@@ -13,7 +13,10 @@
     
     <target name="compile">
         <mkdir dir="${build.dir}"/>
-        <javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime="false" debug="true" />
+        <javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime="false" debug="true">
+            <exclude name="**/UnitTestState.java"/>
+            <exclude name="**/UnitTestTwo.java"/>
+        </javac>
     </target>
 
     <target name="jar" depends="compile">
