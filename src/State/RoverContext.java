@@ -71,7 +71,7 @@ public class RoverContext
         String feedback = "";
 
         try { 
-            roverState.startAnalyse();  // State Transition
+            feedback = roverState.startAnalyse();  // State Transition
             analyser.startAnalysis();   // Start analysis
         } catch (StateException e) { 
             feedback = e.getMessage(); 
