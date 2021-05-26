@@ -52,24 +52,23 @@ public class RoverTest
             System.out.println("FAILED");
             System.out.println("Message Returned: " + output);
         }
-
-        System.out.println("TEST Cases for Soil Analysis (STATE)\n");   // FIXME
-        System.out.print("From Analysis to Analysis: ");          // FIXME
-        try { output = rover.startAnalyse(); }                 // FIXME
-        catch( Exception e ) { output = e.getMessage(); }
-        if ( output.equals("! Rover is already performing analysis") ) // FIXME
-            System.out.println("PASSED");
-        else {
-            System.out.println("FAILED");
-            System.out.println("Message Returned: " + output);
-        }
-        
+ 
         // Make rover to idle and test for analysis again
         rover.setRoverState( rover.getIdleState() );            // FIXME
         System.out.print("From Idle to Analysis: ");              // FIXME
         try { output = rover.startAnalyse(); }                  // FIXME
         catch( Exception e ) { output = e.getMessage(); }
         if ( output.equals("Rover starting to do soil analysis") )         // FIXME
+            System.out.println("PASSED");
+        else {
+            System.out.println("FAILED");
+            System.out.println("Message Returned: " + output);
+        }
+
+        System.out.print("From Analysis to Analysis: ");          // FIXME
+        try { output = rover.startAnalyse(); }                 // FIXME
+        catch( Exception e ) { output = e.getMessage(); }
+        if ( output.equals("! Rover is already performing analysis") ) // FIXME
             System.out.println("PASSED\n");
         else {
             System.out.println("FAILED");
