@@ -18,7 +18,7 @@ public class SensorEvent implements RoverObserver
     public SensorEvent( Sensors inSensor ) { sensor = inSensor; }
 
     @Override
-    public String checkCommand( String command )
+    public String runCommand( String command )
     {
         String msg = "";
 

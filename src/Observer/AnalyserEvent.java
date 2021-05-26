@@ -23,7 +23,7 @@ public class AnalyserEvent implements RoverObserver
     }
 
     @Override
-    public String checkCommand( String command )
+    public String runCommand( String command )
     {
         String msg = "";
         if ( command.equals("S") ) {

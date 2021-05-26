@@ -23,7 +23,7 @@ public class EngineEvent implements RoverObserver
     }
 
     @Override
-    public String checkCommand( String command ) throws ObserverException
+    public String runCommand( String command ) throws ObserverException
     {
         String msg = "";
         double distance = 0.0, angle = 0.0;
