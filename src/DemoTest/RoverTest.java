@@ -46,7 +46,7 @@ public class RoverTest
         analyseState = null;
         sensorEvent = null;
         engineEvent = null;
-        analyseEvent = null;
+        analyserEvent = null;
     }
 
     public static void main(String[] args)
@@ -95,20 +95,6 @@ public class RoverTest
 
         System.out.println("=========================================");
         System.out.println("TEST Cases for Analyse Event (Observer)\n");   // FIXME
-        System.out.print("From : ");          // FIXME
-
-        rover.setRoverState( rover.getIdleState() );            // FIXME
-        try { 
-            rover.startDrive(); 
-            output = rover.startAnalyse();                  // FIXME
-        } catch( Exception e ) { output = e.getMessage(); }
-
-        if ( output.equals("! Cannot do analysing when rover is moving") ) // FIXME
-            System.out.println("PASSED");
-        else {
-            System.out.println("FAILED");
-            System.out.println("Message Returned: " + output);
-        }
  
         // Make rover to idle and test for analysis again
         rover.setRoverState( rover.getIdleState() );            // FIXME
@@ -206,10 +192,75 @@ public class RoverTest
 
     public static void moveToAnalysis()
     {
-        System.out.print("From Moving to Analysis: ");          // FIXME
+        System.out.print("From Moving to Analysis: ");
         
         // Give some distance otherwise the rover cannot drive
         engine.setDistance(1);  
+        try { 
+            rover.startDrive(); 
+            output = rover.startAnalyse();
+        } catch( Exception e ) { output = e.getMessage(); }
+
+        if ( output.equals("! Cannot do analysing when rover is moving") )
+            System.out.println("PASSED");
+        else {
+            System.out.println("FAILED");
+            System.out.println("Message Returned: " + output);
+        }
+    }
+
+    public static void idleToAnalysis()
+    {
+        System.out.print("From Idle to Analysis: ");
+
+        // Make rover to idle and test for analysis again
+        rover.setRoverState( rover.getIdleState() );
+        try { output = rover.startAnalyse(); }
+        catch( Exception e ) { output = e.getMessage(); }
+        if ( output.equals("Rover starting to do soil analysis") )
+            System.out.println("PASSED");
+        else {
+            System.out.println("FAILED");
+            System.out.println("Message Returned: " + output);
+        }
+    }
+
+    public static void analysisToMove()
+    {
+        System.out.print("From Analysis to Driving: ");
+
+        try { 
+            rover.startAnalyse();
+            output = rover.startDrive();
+        } catch( Exception e ) { output = e.getMessage(); }
+        if ( output.equals("! Rover cannot move while performing soil analysis") )
+            System.out.println("PASSED");
+        else {
+            System.out.println("FAILED");
+            System.out.println("Message Returned: " + output);
+        }
+    }
+
+    public static void analysisToAnalysis()
+    {
+        System.out.print("From Analysis to Analysis: ");
+
+        try { 
+            rover.startAnalyse();
+            output = rover.startAnalyse();
+        } catch( Exception e ) { output = e.getMessage(); }
+        if ( output.equals("! Rover is already performing analysis") )
+            System.out.println("PASSED\n");
+        else {
+            System.out.println("FAILED");
+            System.out.println("Message Returned: " + output + "\n");
+        }
+    }
+
+    public static void idleToMoveObs()
+    {
+        System.out.print("From Idle to Moving: ");          // FIXME
+
         try { 
             rover.startDrive(); 
             output = rover.startAnalyse();                  // FIXME
@@ -220,54 +271,6 @@ public class RoverTest
         else {
             System.out.println("FAILED");
             System.out.println("Message Returned: " + output);
-        }
-    }
-
-    public static void idleToAnalysis()
-    {
-        System.out.print("From Idle to Analysis: ");              // FIXME
-
-        // Make rover to idle and test for analysis again
-        rover.setRoverState( rover.getIdleState() );            // FIXME
-        try { output = rover.startAnalyse(); }                  // FIXME
-        catch( Exception e ) { output = e.getMessage(); }
-        if ( output.equals("Rover starting to do soil analysis") )         // FIXME
-            System.out.println("PASSED");
-        else {
-            System.out.println("FAILED");
-            System.out.println("Message Returned: " + output);
-        }
-    }
-
-    public static void analysisToMove()
-    {
-        System.out.print("From Analysis to Driving: ");              // FIXME
-
-        try { 
-            rover.startAnalyse();
-            output = rover.startDrive(); // FIXME
-        } catch( Exception e ) { output = e.getMessage(); }
-        if ( output.equals("! Rover cannot move while performing soil analysis") )         // FIXME
-            System.out.println("PASSED");
-        else {
-            System.out.println("FAILED");
-            System.out.println("Message Returned: " + output);
-        }
-    }
-
-    public static void analysisToAnalysis()
-    {
-        System.out.print("From Analysis to Analysis: ");          // FIXME
-
-        try { 
-            rover.startAnalyse();
-            output = rover.startAnalyse(); // FIXME
-        } catch( Exception e ) { output = e.getMessage(); }
-        if ( output.equals("! Rover is already performing analysis") ) // FIXME
-            System.out.println("PASSED\n");
-        else {
-            System.out.println("FAILED");
-            System.out.println("Message Returned: " + output + "\n");
         }
     }
 }
