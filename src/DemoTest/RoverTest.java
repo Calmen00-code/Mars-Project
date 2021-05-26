@@ -19,16 +19,50 @@ public class RoverTest
         SoilAnalyser analyser = new SoilAnalyser();
         RoverContext rover = new RoverContext( engine, analyser );
 
-        System.out.println("=========================================\n");
-        System.out.print("TEST Moving Successful: ");
+        System.out.println("=========================================");
+        System.out.println("TEST Cases for Moving (STATE)\n");
+        System.out.print("From Idle to Moving: ");
         try { output = rover.startDrive(); }
         catch( Exception e ) { output = e.getMessage(); }
         if ( output.equals("Rover starting to move") )
+            System.out.println("PASSED");
+        else {
+            System.out.println("FAILED");
+            System.out.println("Message Returned: " + output);
+        }
+        
+        System.out.print("From Moving to Moving: ");
+        try { output = rover.startDrive(); }
+        catch( Exception e ) { output = e.getMessage(); }
+        if ( output.equals("Rover is already moving") )
             System.out.println("PASSED\n");
         else {
             System.out.println("FAILED");
             System.out.println("Message Returned: " + output + "\n");
         }
+
+        System.out.println("=========================================");
+        System.out.println("TEST Cases for Soil Analysis (STATE)\n");   // FIXME
+        System.out.print("From Moving to Analysis: ");          // FIXME
+        try { output = rover.startAnalysis(); }                 // FIXME
+        catch( Exception e ) { output = e.getMessage(); }
+        if ( output.equals("! Cannot do analysing when rover is moving") ) // FIXME
+            System.out.println("PASSED");
+        else {
+            System.out.println("FAILED");
+            System.out.println("Message Returned: " + output);
+        }
         
+        // Make rover to idle and test for analysis again
+        rover.setRoverState( rover.getIdleState() );            // FIXME
+        System.out.print("Moving Unsuccessful: ");              // FIXME
+        try { output = rover.startAnalyse(); }                  // FIXME
+        catch( Exception e ) { output = e.getMessage(); }
+        if ( output.equals("Rover starting to do soil analysis") )         // FIXME
+            System.out.println("PASSED\n");
+        else {
+            System.out.println("FAILED");
+            System.out.println("Message Returned: " + output + "\n");
+        }
     }
 }
