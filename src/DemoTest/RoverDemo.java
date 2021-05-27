@@ -64,8 +64,7 @@ public class RoverDemo
             } catch( Exception e ) {
                 msg = e.getMessage();
             }
-            if ( msg != null )
-                System.out.println(msg);
+            System.out.println(msg);
             ++i;
             if ( i == testCommand.size() ) {
                 i = 0;
