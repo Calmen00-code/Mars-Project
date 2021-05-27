@@ -8,6 +8,7 @@ package Assignment2.Observer;
 
 import Assignment2.API.SoilAnalyser;
 import Assignment2.State.StateException;
+import Assignment2.State.RoverContext;
 import java.util.Base64;
 
 public class AnalyserEvent implements RoverObserver
