@@ -3,6 +3,8 @@
  * Purpose: Checking the command passed from Earth
  */
 
+package Assignment2.DemoTest;
+
 public class ValidateCommand
 {
     public boolean commandExist( String command )

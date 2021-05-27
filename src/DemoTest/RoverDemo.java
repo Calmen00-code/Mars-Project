@@ -9,6 +9,7 @@ import java.util.*;
 import Assignment2.API.*;
 import Assignment2.Observer.*;
 import Assignment2.State.*;
+import Assignment2.DemoTest.*;
 
 public class RoverDemo
 {
@@ -25,6 +26,7 @@ public class RoverDemo
         RoverObserver analyserEvent;
         RobotRover robot;
         HashSet<RoverObserver> roverObs;
+        ValidateCommand validate;
         
         engine = new EngineSystem();
         analyser = new SoilAnalyser();
@@ -35,6 +37,7 @@ public class RoverDemo
         sensorEvent = new SensorEvent( sensor );
         roverObs = new HashSet<RoverObserver>();
         robot = new RobotRover( roverObs );
+        validate = new ValidateCommand();
 
         // Adding all event as observer
         robot.addObserver( sensorEvent );
@@ -52,6 +55,8 @@ public class RoverDemo
         while( true ) {
             try {
                 Thread.sleep(1000);
+                if ( validate.commandExist( testCommand.get(i) ) )
+                    throw new ValidateException("Command does not exist");
                 robot.roverUpdate( testCommand.get(i) );
                 msg = robot.getEventMsg();
             } catch (InterruptedException e ) {
