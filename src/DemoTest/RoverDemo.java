@@ -6,7 +6,9 @@
 package Assignment2.DemoTest;
 
 import java.util.*;
+import Assignment2.API.*;
 import Assignment2.Observer.*;
+import Assignment2.State.*;
 
 public class RoverDemo
 {
@@ -22,11 +24,11 @@ public class RoverDemo
         RoverObserver engineEvent;
         RoverObserver analyserEvent;
         RobotRover robot;
-        HashSet<RoverObservers> roverObs;
+        HashSet<RoverObserver> roverObs;
         
         engine = new EngineSystem();
         analyser = new SoilAnalyser();
-        rover = RoverContext( engine, analyser );
+        rover = new RoverContext( engine, analyser );
         analyserEvent = new AnalyserEvent( analyser, rover );
         engineEvent = new EngineEvent( engine, rover );
         sensor = new Sensors();
@@ -49,16 +51,20 @@ public class RoverDemo
         int i = 0;
         while( true ) {
             try {
-                robot.updateCommand( testCommand[i] );
+                Thread.sleep(1000);
+                robot.roverUpdate( testCommand.get(i) );
                 msg = robot.getEventMsg();
+            } catch (InterruptedException e ) {
+                /* Do nothing */
             } catch( Exception e ) {
                 msg = e.getMessage();
             }
             System.out.println(msg);
-            Thread.sleep(1000);
             ++i;
-            if ( i == testCommand.length )
+            if ( i == testCommand.size() ) {
                 i = 0;
+                engine.setDistance(0);
+            }
         }
     }
 }
