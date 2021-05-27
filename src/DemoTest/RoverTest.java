@@ -119,15 +119,10 @@ public class RoverTest
         analysisToDriveObs();
         tearDown(); 
 
-        System.out.print("From Analysis to Analysis: ");          // FIXME
-        try { output = rover.startAnalyse(); }                 // FIXME
-        catch( Exception e ) { output = e.getMessage(); }
-        if ( output.equals("! Rover is already performing analysis") ) // FIXME
-            System.out.println("PASSED\n");
-        else {
-            System.out.println("FAILED");
-            System.out.println("Message Returned: " + output + "\n");
-        }
+        setUp();
+        analysisToAnalysis();
+        tearDown(); 
+
     }
 
     public static void idleToMove()
@@ -321,6 +316,22 @@ public class RoverTest
         else {
             System.out.println("FAILED");
             System.out.println("Message Returned: " + output);
+        }
+    }
+
+    public static void analysisToAnalysisObs()
+    {
+        System.out.print("From Analysis to Analysis: ");
+        try { 
+            robot.roverUpdate( "S" );
+            robot.roverUpdate( "S" );
+            output = robot.getEventMsg();
+        } catch( Exception e ) { output = e.getMessage(); }
+        if ( output.equals("! Rover is already performing analysis") )
+            System.out.println("PASSED\n");
+        else {
+            System.out.println("FAILED");
+            System.out.println("Message Returned: " + output + "\n");
         }
     }
 }
