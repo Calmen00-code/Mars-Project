@@ -32,7 +32,7 @@ public class AnalyserEvent implements RoverObserver
             analyser.startAnalysis();
 
             byte[] data = analyser.pollAnalysis();
-            msg += "S " + Base64.getEncoder().encodeToString(data) + "\n";
+            msg += "S " + Base64.getEncoder().encodeToString(data);
         }
         return msg;
     }
