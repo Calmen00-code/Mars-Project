@@ -40,7 +40,8 @@ public class RobotRover implements RobotRoverSubject
                 throw new ObserverException(e.getMessage());
             }
 
-            eventMsg += tmpMsg + "\n";
+            // eventMsg += tmpMsg + "\n";
+            eventMsg = tmpMsg;
 
             // Found the correct operation when tmpMsg is no longer empty
             if ( !tmpMsg.equals("") )
