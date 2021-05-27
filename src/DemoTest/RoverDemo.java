@@ -68,7 +68,8 @@ public class RoverDemo
             ++i;
             if ( i == testCommand.size() ) {
                 i = 0;
-                engine.setDistance(0);
+                // TODO Implement the checking for getDistanceDriven()
+                engine.setDistance(0);  
             }
         }
     }
