@@ -18,9 +18,9 @@ public class SoilAnalyser
     public byte[] pollAnalysis() 
     { 
         byte[] data = new byte[2];
-        data[0] = 1234;
-        data[1] = 1234;
-        data[2] = 1234;
+        data[0] = 127;
+        data[1] = 127;
+        data[2] = 127;
         return data;
     }
 }
