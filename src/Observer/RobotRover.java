@@ -7,6 +7,7 @@
 package Assignment2.Observer;
 
 import java.util.*;
+import Assignment2.State.StateException;
 
 public class RobotRover implements RobotRoverSubject
 {
@@ -32,12 +33,18 @@ public class RobotRover implements RobotRoverSubject
 
         // Appending every event message returned by each observers
         for ( RoverObserver ob : roverObservers ) {
-            tmpMsg = ob.runCommand( command );
-            eventMsg += tmpMsg;
+            try {
+                tmpMsg = ob.runCommand( command );
+            } catch ( StateException e ) {
+                eventMsg = "";
+                throw new ObserverException(e.getMessage());
+            }
 
             // Found the correct operation when tmpMsg is no longer empty
             if ( !tmpMsg.equals("") )
                 break;
+            else
+                eventMsg += tmpMsg;
         }
     }
 
