@@ -15,5 +15,12 @@ public class SoilAnalyser
      * Retrieves the results of a soil analysis, if they're ready yet. If no new 
      * results have been produced, this method returns null.
      */
-    public byte[] pollAnalysis() { return null; }
+    public byte[] pollAnalysis() 
+    { 
+        byte[] data = new byte[2];
+        data[0] = 1234;
+        data[1] = 1234;
+        data[2] = 1234;
+        return data;
+    }
 }
