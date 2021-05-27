@@ -12,5 +12,9 @@ public class Sensors
     public double readLightLevel() { return 1.0; }
 
     /** Takes a photo and returns the binary data making up the image. */
-    public byte[] takePhoto() { return null; }
+    public byte[] takePhoto() 
+    { 
+        byte[] data = "Photo".getBytes();
+        return data; 
+    }
 }
