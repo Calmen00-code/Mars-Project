@@ -33,8 +33,7 @@ public class AnalyserEvent implements RoverObserver
 
                 byte[] data = analyser.pollAnalysis();
                 msg += "S " + Base64.getEncoder().encodeToString(data) + "\n";
-            } catch (Exception e) {
-                System.out.println("EXCEPTION HERE");
+            } catch (StateException e) {
                 msg = e.getMessage();
             }
         }
