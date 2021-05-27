@@ -9,6 +9,7 @@
 package Assignment2.Observer;
 
 import Assignment2.API.Sensors;
+import Assignment2.State.StateException;
 import java.util.Base64;
 
 public class SensorEvent implements RoverObserver
@@ -18,7 +19,7 @@ public class SensorEvent implements RoverObserver
     public SensorEvent( Sensors inSensor ) { sensor = inSensor; }
 
     @Override
-    public String runCommand( String command )
+    public String runCommand( String command ) throws StateException
     {
         String msg = "";
 

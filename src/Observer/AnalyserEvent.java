@@ -24,19 +24,15 @@ public class AnalyserEvent implements RoverObserver
     }
 
     @Override
-    public String runCommand( String command )
+    public String runCommand( String command ) throws StateException
     {
         String msg = "";
         if ( command.equals("S") ) {
-            try {
-                rover.startAnalyse();
-                analyser.startAnalysis();
+            rover.startAnalyse();
+            analyser.startAnalysis();
 
-                byte[] data = analyser.pollAnalysis();
-                msg += "S " + Base64.getEncoder().encodeToString(data) + "\n";
-            } catch (StateException e) {
-                msg = e.getMessage();
-            }
+            byte[] data = analyser.pollAnalysis();
+            msg += "S " + Base64.getEncoder().encodeToString(data) + "\n";
         }
         return msg;
     }

@@ -4,8 +4,9 @@
  */
 
 package Assignment2.Observer;
+import Assignment2.State.StateException;
 
 public interface RoverObserver
 {
-    public String runCommand(String command) throws ObserverException;
+    public String runCommand(String command) throws StateException, ObserverException;
 }
