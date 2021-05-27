@@ -33,7 +33,7 @@ public class AnalysisState implements RoverState
 
     @Override
     public String startAnalyse() throws StateException
-    {  
+    { 
         throw new StateException(
                 "! Rover is already performing analysis");
     }

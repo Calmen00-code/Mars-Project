@@ -7,19 +7,19 @@
 package Assignment2.Observer;
 
 import Assignment2.API.SoilAnalyser;
-import Assignment2.State.AnalysisState;
+import Assignment2.State.IdleState;
 import java.util.Base64;
 
 public class AnalyserEvent implements RoverObserver
 {
     private SoilAnalyser analyser;
-    private AnalysisState analyseState;
+    private IdleState idleState;
 
     public AnalyserEvent( SoilAnalyser inAnalyser, 
-                    AnalysisState inAnalyseState ) 
+                    IdleState inIdleState ) 
     { 
         analyser = inAnalyser; 
-        analyseState = inAnalyseState;
+        idleState = inIdleState;
     }
 
     @Override
@@ -28,12 +28,13 @@ public class AnalyserEvent implements RoverObserver
         String msg = "";
         if ( command.equals("S") ) {
             try {
-                analyseState.startAnalyse();
+                idleState.startAnalyse();
                 analyser.startAnalysis();
 
                 byte[] data = analyser.pollAnalysis();
                 msg += "S " + Base64.getEncoder().encodeToString(data) + "\n";
             } catch (Exception e) {
+                System.out.println("EXCEPTION HERE");
                 msg = e.getMessage();
             }
         }

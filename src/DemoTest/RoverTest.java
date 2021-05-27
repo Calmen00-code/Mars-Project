@@ -17,7 +17,7 @@ public class RoverTest
     private static SoilAnalyser analyser;
     private static RoverContext rover;      // Controller for State Pattern
     private static Sensors sensor;
-    private static AnalysisState analyseState;
+    private static IdleState idleState;
     private static RoverObserver sensorEvent;
     private static RoverObserver engineEvent;
     private static RoverObserver analyserEvent;
@@ -30,9 +30,8 @@ public class RoverTest
         engine = new EngineSystem();
         analyser = new SoilAnalyser();
         rover = new RoverContext( engine, analyser );
-        analyseState = new AnalysisState( rover );
-        analyserEvent = new AnalyserEvent( analyser, analyseState );
-        engine = new EngineSystem();
+        idleState = new IdleState( rover );
+        analyserEvent = new AnalyserEvent( analyser, idleState );
         engineEvent = new EngineEvent( engine, rover );
         sensor = new Sensors();
         sensorEvent = new SensorEvent( sensor );
@@ -52,10 +51,12 @@ public class RoverTest
         analyser = null;
         rover = null;
         sensor = null;
-        analyseState = null;
+        idleState = null;
         sensorEvent = null;
         engineEvent = null;
         analyserEvent = null;
+        robot = null;
+        roverObs = null;
     }
 
     public static void main(String[] args)
@@ -108,28 +109,18 @@ public class RoverTest
         setUp();
         idleToMoveObs();
         tearDown();
- 
-        // Make rover to idle and test for analysis again
-        rover.setRoverState( rover.getIdleState() );            // FIXME
-        System.out.print("From Idle to Analysis: ");              // FIXME
-        try { output = rover.startAnalyse(); }                  // FIXME
-        catch( Exception e ) { output = e.getMessage(); }
-        if ( output.equals("Rover starting to do soil analysis") )         // FIXME
-            System.out.println("PASSED");
-        else {
-            System.out.println("FAILED");
-            System.out.println("Message Returned: " + output);
-        }
 
-        System.out.print("From Analysis to Driving: ");              // FIXME
-        try { output = rover.startDrive(); }                  // FIXME
-        catch( Exception e ) { output = e.getMessage(); }
-        if ( output.equals("! Rover cannot move while performing soil analysis") )         // FIXME
-            System.out.println("PASSED");
-        else {
-            System.out.println("FAILED");
-            System.out.println("Message Returned: " + output);
-        }
+        setUp();
+        idleToMoveInvalidDistObs();
+        tearDown();
+
+        setUp();
+        idleToAnalysisObs();
+        tearDown();
+
+        setUp();
+        analysisToDriveObs();
+        tearDown(); 
 
         System.out.print("From Analysis to Analysis: ");          // FIXME
         try { output = rover.startAnalyse(); }                 // FIXME
@@ -279,7 +270,56 @@ public class RoverTest
             output = robot.getEventMsg();
         } catch( Exception e ) { output = e.getMessage(); }
 
-        if ( output.equals("Drive for 12.5km") )
+        if ( output.equals("Drive for 12.5km\n") )
+            System.out.println("PASSED");
+        else {
+            System.out.println("FAILED");
+            System.out.println("Message Returned: " + output);
+        }
+    }
+
+    public static void idleToMoveInvalidDistObs()
+    {
+        System.out.print("From Idle to Moving (No Distance): ");
+
+        try { 
+            robot.roverUpdate( "D" );
+            output = robot.getEventMsg();
+        } catch( Exception e ) { output = e.getMessage(); }
+
+        if ( output.equals("! Invalid distance") )
+            System.out.println("PASSED");
+        else {
+            System.out.println("FAILED");
+            System.out.println("Message Returned: " + output);
+        }
+    }
+
+    public static void idleToAnalysisObs()
+    {
+        System.out.print("From Idle to Analysis: ");
+
+        try { 
+            robot.roverUpdate( "S" ); 
+            output = robot.getEventMsg();
+        } catch( Exception e ) { output = e.getMessage(); }
+        if ( output.equals("S AQIDBAECAwQBAgME\n\n\n") )
+            System.out.println("PASSED");
+        else {
+            System.out.println("FAILED");
+            System.out.println("Message Returned: " + output);
+        }
+    }
+
+    public static void analysisToDriveObs()
+    {
+        System.out.print("From Analysis to Driving: ");
+        try { 
+            robot.roverUpdate( "S" );
+            robot.roverUpdate( "D 12.5" ); 
+            output = robot.getEventMsg();
+        } catch( Exception e ) { output = e.getMessage(); }
+        if ( output.equals("S AQIDBAECAwQBAgME\nDrive for 12.5km\n\n") )
             System.out.println("PASSED");
         else {
             System.out.println("FAILED");

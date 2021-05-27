@@ -35,7 +35,7 @@ public class RobotRover implements RobotRoverSubject
             tmpMsg = ob.runCommand( command );
             eventMsg += tmpMsg;
 
-            // Found the correct opeartion when tmpMsg is no longer empty
+            // Found the correct operation when tmpMsg is no longer empty
             if ( !tmpMsg.equals("") )
                 break;
         }
