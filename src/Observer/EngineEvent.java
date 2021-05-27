@@ -50,7 +50,7 @@ public class EngineEvent implements RoverObserver
                 // Second argument must be a valid angle
                 angle = Double.parseDouble(parseCommand[1]);
                 if ( angle >= -180 && angle <= 180 )
-                    msg += "Rover turn for " + angle + "degree\n";
+                    msg += "Rover turn for " + angle + " degree\n";
                 else
                     throw new ObserverException("! Invalid angle");
             } catch (NumberFormatException e) {
