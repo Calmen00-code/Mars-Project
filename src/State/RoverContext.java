@@ -79,5 +79,6 @@ public class RoverContext
     public DriveState getDriveState() { return isDrive; }
     public IdleState getIdleState() { return isIdle; }
     public AnalysisState getAnalysisState() { return isAnalyse; }
+    public roverState getCurrentState() { return roverState; }
     public EngineSystem getEngine() { return engine; }
 }
