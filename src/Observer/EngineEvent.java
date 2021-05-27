@@ -49,6 +49,11 @@ public class EngineEvent implements RoverObserver
             try {
                 // Second argument must be a valid angle
                 angle = Double.parseDouble(parseCommand[1]);
+
+                // Cannot turn when rover is doing analysis
+                if ( rover.getCurrentState() instanceof AnalysisState )
+                    throw new ObserverException("! Cannot turn when rover is performing analysis";
+
                 if ( angle >= -180 && angle <= 180 )
                     msg += "Rover turn for " + angle + " degree";
                 else
