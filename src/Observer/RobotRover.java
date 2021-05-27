@@ -35,6 +35,7 @@ public class RobotRover implements RobotRoverSubject
         for ( RoverObserver ob : roverObservers ) {
             try {
                 tmpMsg = ob.runCommand( command );
+                System.out.println(tmpMsg);
             } catch ( StateException e ) {
                 eventMsg = "";
                 throw new ObserverException(e.getMessage());

@@ -59,12 +59,13 @@ public class RoverDemo
                     throw new ValidateException("Command does not exist");
                 robot.roverUpdate( testCommand.get(i) );
                 msg = robot.getEventMsg();
-            } catch (InterruptedException e ) {
+            } catch ( InterruptedException e ) {
                 /* Do nothing */
             } catch( Exception e ) {
                 msg = e.getMessage();
             }
-            System.out.println(msg);
+            if ( msg != null )
+                System.out.println(msg);
             ++i;
             if ( i == testCommand.size() ) {
                 i = 0;

@@ -44,6 +44,6 @@ public class DriveState implements RoverState
     public String startAnalyse() throws StateException
     {  
         throw new StateException(
-                "! Cannot do analysing when rover is moving");
+                "! Cannot do analysing when rover is moving\n");
     }
 }
