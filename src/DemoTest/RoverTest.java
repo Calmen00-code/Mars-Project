@@ -17,7 +17,6 @@ public class RoverTest
     private static SoilAnalyser analyser;
     private static RoverContext rover;      // Controller for State Pattern
     private static Sensors sensor;
-    private static IdleState idleState;
     private static RoverObserver sensorEvent;
     private static RoverObserver engineEvent;
     private static RoverObserver analyserEvent;
@@ -30,8 +29,7 @@ public class RoverTest
         engine = new EngineSystem();
         analyser = new SoilAnalyser();
         rover = new RoverContext( engine, analyser );
-        idleState = new IdleState( rover );
-        analyserEvent = new AnalyserEvent( analyser, idleState );
+        analyserEvent = new AnalyserEvent( analyser, rover );
         engineEvent = new EngineEvent( engine, rover );
         sensor = new Sensors();
         sensorEvent = new SensorEvent( sensor );
@@ -51,7 +49,6 @@ public class RoverTest
         analyser = null;
         rover = null;
         sensor = null;
-        idleState = null;
         sensorEvent = null;
         engineEvent = null;
         analyserEvent = null;
@@ -303,7 +300,7 @@ public class RoverTest
             robot.roverUpdate( "S" ); 
             output = robot.getEventMsg();
         } catch( Exception e ) { output = e.getMessage(); }
-        if ( output.equals("S AQIDBAECAwQBAgME\n\n\n") )
+        if ( output.equals("S f39/\n") )
             System.out.println("PASSED");
         else {
             System.out.println("FAILED");
@@ -319,7 +316,7 @@ public class RoverTest
             robot.roverUpdate( "D 12.5" ); 
             output = robot.getEventMsg();
         } catch( Exception e ) { output = e.getMessage(); }
-        if ( output.equals("S AQIDBAECAwQBAgME\nDrive for 12.5km\n\n") )
+        if ( output.equals("") )
             System.out.println("PASSED");
         else {
             System.out.println("FAILED");
