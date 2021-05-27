@@ -66,16 +66,12 @@ public class RoverContext
         return feedback;
     }
 
-    public String startAnalyse()
+    public String startAnalyse() throws StateException
     {
         String feedback = "";
 
-        try { 
-            feedback = roverState.startAnalyse();  // State Transition
-            analyser.startAnalysis();   // Start analysis
-        } catch (StateException e) { 
-            feedback = e.getMessage(); 
-        }
+        feedback = roverState.startAnalyse();  // State Transition
+        analyser.startAnalysis();   // Start analysis
 
         return feedback;
     }
