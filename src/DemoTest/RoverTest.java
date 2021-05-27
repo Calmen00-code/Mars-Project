@@ -316,7 +316,7 @@ public class RoverTest
             robot.roverUpdate( "D 12.5" ); 
             output = robot.getEventMsg();
         } catch( Exception e ) { output = e.getMessage(); }
-        if ( output.equals("") )
+        if ( output.equals("! Rover cannot move while performing soil analysis") )
             System.out.println("PASSED");
         else {
             System.out.println("FAILED");
