@@ -4,7 +4,7 @@
     <property name="resources.dir" value="resources"/>
     <property name="build.dir"     value="build"/>
     <property name="dist.dir"      value="dist"/>
-    <property name="main-class"    value="Assignment2.DemoTest.RoverTest"/>
+    <property name="main-class"    value="Assignment2.DemoTest.RoverDemo"/>
     
     <target name="clean">
         <delete dir="${build.dir}"/>
