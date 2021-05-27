@@ -35,17 +35,16 @@ public class RobotRover implements RobotRoverSubject
         for ( RoverObserver ob : roverObservers ) {
             try {
                 tmpMsg = ob.runCommand( command );
-                System.out.println(tmpMsg);
             } catch ( StateException e ) {
                 eventMsg = "";
                 throw new ObserverException(e.getMessage());
             }
 
+            eventMsg += tmpMsg + "\n";
+
             // Found the correct operation when tmpMsg is no longer empty
             if ( !tmpMsg.equals("") )
                 break;
-            else
-                eventMsg += tmpMsg;
         }
     }
 
