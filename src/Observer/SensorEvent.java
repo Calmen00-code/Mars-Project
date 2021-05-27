@@ -24,9 +24,9 @@ public class SensorEvent implements RoverObserver
 
         if ( command.charAt(0) == 'E' ) {                   // Generating Report
             msg = "E " + sensor.readTemperature() + " " + 
-                  sensor.readVisibility() + " " + sensor.readLightLevel();
+                  sensor.readVisibility() + " " + sensor.readLightLevel() + "\n";
         } else if ( command.charAt(0) == 'P' )              // Taking Photo
-            msg = "P " + Base64.getEncoder().encodeToString(sensor.takePhoto());
+            msg = "P " + Base64.getEncoder().encodeToString(sensor.takePhoto()) + "\n";
 
         return msg;
     }

@@ -28,9 +28,17 @@ public class RobotRover implements RobotRoverSubject
     @Override
     public void roverUpdate( String command ) throws ObserverException
     {
+        String tmpMsg = "";
+
         // Appending every event message returned by each observers
-        for ( RoverObserver ob : roverObservers )
-            eventMsg += ob.runCommand( command ) + "\n";
+        for ( RoverObserver ob : roverObservers ) {
+            tmpMsg = ob.runCommand( command );
+            eventMsg += tmpMsg;
+
+            // Found the correct opeartion when tmpMsg is no longer empty
+            if ( !tmpMsg.equals("") )
+                break;
+        }
     }
 
     public String getEventMsg() { return eventMsg; }
