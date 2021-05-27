@@ -25,7 +25,7 @@ public class AnalyserEvent implements RoverObserver
     @Override
     public String runCommand( String command )
     {
-        String msg = "";
+        String msg = "", byteStr = "";
         if ( command.equals("S") ) {
             try {
                 analyseState.startAnalyse();
@@ -33,8 +33,10 @@ public class AnalyserEvent implements RoverObserver
 
                 byte[] data = analyser.pollAnalysis();
                 msg += "S ";
+                // Appending all the data of byte into the string 
                 for ( int i = 0; i < data.length; ++i )
-                    msg += Base64.getEncoder().encodeToString(data[i]);
+                    byteStr += data[i];
+                msg += Base64.getEncoder().encodeToString(byteStr);
             } catch (Exception e) {
                 msg = e.getMessage();
             }
