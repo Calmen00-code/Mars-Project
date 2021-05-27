@@ -47,9 +47,17 @@ public class RoverDemo
         testCommand.add("D 10");
         testCommand.add("T 45");
         testCommand.add("S");
+        testCommand.add("S");
+        testCommand.add("D 100");
+        testCommand.add("T 45");
         testCommand.add("E");
         testCommand.add("P");
-        testCommand.add("Invalid");
+        testCommand.add("T -181");
+        testCommand.add("T 181");
+        testCommand.add("T 180");
+        testCommand.add("T -180");
+        // This will result in ! Invalid Command return message
+        testCommand.add("Invalid");     
         
         int i = 0;
         while( true ) {

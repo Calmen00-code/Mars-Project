@@ -8,7 +8,7 @@ package Assignment2.Observer;
 
 import Assignment2.API.EngineSystem;
 import Assignment2.State.RoverContext;
-import Assignment2.State.StateException;
+import Assignment2.State.*;
 
 public class EngineEvent implements RoverObserver
 {
@@ -52,7 +52,7 @@ public class EngineEvent implements RoverObserver
 
                 // Cannot turn when rover is doing analysis
                 if ( rover.getCurrentState() instanceof AnalysisState )
-                    throw new ObserverException("! Cannot turn when rover is performing analysis";
+                    throw new ObserverException("! Cannot turn when rover is performing analysis");
 
                 if ( angle >= -180 && angle <= 180 )
                     msg += "Rover turn for " + angle + " degree";
