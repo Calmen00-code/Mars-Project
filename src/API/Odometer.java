@@ -11,7 +11,11 @@ public class Odometer
     private double initialDistance;
     private double finalDistance;
 
-    public Odometer() { }
+    public Odometer() 
+    { 
+        initialDistance = 0;
+        finalDistance = 0;
+    }
 
     public void setInitialDistance( double setDistance )
     {
