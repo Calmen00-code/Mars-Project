@@ -30,8 +30,6 @@ public class AnalyserEvent extends RoverObserver
         if ( command.equals("S") ) {
             rover.startAnalyse();
             analyser.startAnalysis();
-            byte[] data = analyser.pollAnalysis();
-            msg += "S " + Base64.getEncoder().encodeToString(data);
         }
         return msg;
     }
