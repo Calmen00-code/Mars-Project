@@ -17,11 +17,6 @@ public class RoverContext
     private EngineSystem engine;
     private SoilAnalyser analyser;
     private Odometer odometer;
-/*  
-    FIXME 
-    private SensorOnState sensorOn;
-    private SensorIdleState sensorIdle;
-*/
 
     private RoverState roverState;
 
@@ -35,17 +30,9 @@ public class RoverContext
         isAnalyse = new AnalysisState(this);
         engine = inEngine;
         analyser = inAnalyser;
-/*
-        FIXME
-        sensorOn = new SensorOnState(this);
-        sensorIdle = new SensorIdleState(this);
-*/
 
         // Rover is not moving initially
         roverState = isIdle;
-
-        // Rover is not reading any data initially
-        // FIXME sensorIdle = 
     }
 
     public void setRoverState( RoverState newRoverState )

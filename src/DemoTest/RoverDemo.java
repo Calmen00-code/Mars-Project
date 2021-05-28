@@ -123,6 +123,7 @@ public class RoverDemo
             if ( engine.getDistanceDriven() - odometer.getFinalDistance() 
                  <= odometer.getInitialDistance() ) {
                 System.out.println("D " + engineEvent.getDistance());
+                rover.setRoverState( rover.getIdleState() );
             }
         }
     }
