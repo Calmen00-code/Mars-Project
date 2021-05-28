@@ -63,7 +63,7 @@ public class RoverDemo
         while( true ) {
             try {
                 Thread.sleep(1000);
-                if ( !validate.commandExist( testCommand.get(i) ) )
+                if ( !validate.commandIsValid( testCommand.get(i) ) )
                     throw new ValidateException("Command does not exist");
                 robot.roverUpdate( testCommand.get(i) );
                 msg = robot.getEventMsg();
@@ -78,6 +78,7 @@ public class RoverDemo
                 i = 0;
                 // TODO Implement the checking for getDistanceDriven()
                 engine.setDistance(0);  
+                System.out.println("D " + engineEvent.getDistance());
             }
         }
     }

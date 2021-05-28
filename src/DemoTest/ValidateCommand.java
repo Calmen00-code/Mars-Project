@@ -7,7 +7,7 @@ package Assignment2.DemoTest;
 
 public class ValidateCommand
 {
-    public boolean commandExist( String command )
+    public boolean commandIsValid( String command )
     {
         boolean exist = false;
         char mode = command.charAt(0);

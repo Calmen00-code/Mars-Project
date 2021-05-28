@@ -14,30 +14,34 @@ public class EngineEvent implements RoverObserver
 {
     private EngineSystem engine;
     private RoverContext rover;
+    private double distance;
 
     public EngineEvent( EngineSystem inEngine, RoverContext inRover ) 
     { 
         // Dependency Injection
         engine = inEngine; 
         rover = inRover;
+        distance = 0.0;
     }
 
     @Override
     public String runCommand( String command ) throws ObserverException
     {
         String msg = "";
-        double distance = 0.0, angle = 0.0;
+        double parseDistance = 0.0, angle = 0.0;
 
         String[] parseCommand = command.split(" "); // Parse the command
 
         if ( parseCommand[0].equals("D") ) { // Checking for drive
             try {
                 if ( parseCommand.length < 2 )
-                    throw new ObserverException("! Invalid distance");
+                    throw new ObserverException("! No distance given");
 
                 // Second argument must be a valid distance
-                distance = Double.parseDouble(parseCommand[1]);
+                parseDistance = Double.parseDouble(parseCommand[1]);
+                distance = parseDistance;
                 rover.startDrive();
+                
                 msg += "Drive for " + distance + "km";
             } catch (NumberFormatException e) {
                 throw new ObserverException("! Invalid distance");
@@ -64,4 +68,9 @@ public class EngineEvent implements RoverObserver
         }
         return msg;
     } 
+
+    public double getDistance()
+    {
+        return distance;
+    }
 }
