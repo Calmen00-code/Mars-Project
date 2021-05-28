@@ -11,12 +11,7 @@ public class Odometer
     private double initialDistance;
     private double finalDistance;
 
-    public Odometer( double inDistance, 
-                     double finDistance ) 
-    {
-        initialDistance = inDistance;
-        finalDistance = finDistance;
-    }
+    public Odometer() { }
 
     public void setInitialDistance( double setDistance )
     {
