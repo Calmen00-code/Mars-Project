@@ -21,7 +21,7 @@ public class DriveState implements RoverState
     {
         rover = inRoverContext;
         engine = inEngine;
-        odometer = inOdometer
+        odometer = inOdometer;
     }
 
     @Override
@@ -29,7 +29,8 @@ public class DriveState implements RoverState
     {
         String feedback = "Rover is already moving... Update new distance";
 
-        if ( engine.getDistanceDriven() - <=  ) {
+        if ( engine.getDistanceDriven() - odometer.getFinalDistance() 
+             <= odometer.getInitialDistance() ) {
             rover.setRoverState( rover.getIdleState() );
             throw new StateException("! Rover had already reached its destination");
         }

@@ -11,10 +11,15 @@ import Assignment2.API.EngineSystem;
 public class IdleState implements RoverState
 {
     private RoverContext rover;
+    private EngineSystem engine;
+    private Odometer odometer;
 
-    public IdleState( RoverContext inRoverContext )
+    public IdleState( RoverContext inRoverContext, 
+                      EngineSystem inEngine, Odometer inOdometer )
     {
         rover = inRoverContext;
+        engine = inEngine;
+        odometer = inOdometer;
     }
 
     @Override
@@ -24,7 +29,8 @@ public class IdleState implements RoverState
         String feedback = "Rover starting to move";
         EngineSystem engine = rover.getEngine();
 
-        if ( engine.getDistanceDriven() <= 0 ) {
+        if ( engine.getDistanceDriven() - odometer.getFinalDistance() 
+             <= odometer.getInitialDistance() ) {
             rover.setRoverState( rover.getIdleState() );
             throw new StateException("! Rover had already reached its destination");
         }
