@@ -11,7 +11,7 @@ import Assignment2.State.StateException;
 import Assignment2.State.RoverContext;
 import java.util.Base64;
 
-public class AnalyserEvent implements RoverObserver
+public class AnalyserEvent extends RoverObserver
 {
     private SoilAnalyser analyser;
     private RoverContext rover;

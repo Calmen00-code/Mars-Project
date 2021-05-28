@@ -10,7 +10,7 @@ import Assignment2.API.EngineSystem;
 import Assignment2.State.RoverContext;
 import Assignment2.State.*;
 
-public class EngineEvent implements RoverObserver
+public class EngineEvent extends RoverObserver
 {
     private EngineSystem engine;
     private RoverContext rover;
@@ -69,6 +69,7 @@ public class EngineEvent implements RoverObserver
         return msg;
     } 
 
+    @Override
     public double getDistance()
     {
         return distance;

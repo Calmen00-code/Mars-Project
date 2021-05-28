@@ -12,7 +12,7 @@ import Assignment2.API.Sensors;
 import Assignment2.State.*;
 import java.util.Base64;
 
-public class SensorEvent implements RoverObserver
+public class SensorEvent extends RoverObserver
 {
     private Sensors sensor;
 

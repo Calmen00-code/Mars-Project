@@ -8,6 +8,6 @@ import Assignment2.State.StateException;
 
 public abstract class RoverObserver
 {
-    public String runCommand(String command) throws StateException, ObserverException;
-    public double getDistance();
+    public String runCommand(String command) throws StateException, ObserverException { return ""; }
+    public double getDistance() { return 0.0; };
 }
