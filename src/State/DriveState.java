@@ -29,12 +29,12 @@ public class DriveState implements RoverState
     {
         String feedback = "Rover is already moving... Update new distance";
 
+        // Check if rover reached its destitation 
         if ( engine.getDistanceDriven() - odometer.getFinalDistance() 
              <= odometer.getInitialDistance() ) {
             rover.setRoverState( rover.getIdleState() );
-            throw new StateException("! Rover had already reached its destination");
         }
-        else
+        else    // Otherwise, start driving or overwrite the old distance
             rover.setRoverState( rover.getDriveState() );
         return feedback;
     }
