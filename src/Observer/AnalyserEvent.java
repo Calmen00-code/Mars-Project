@@ -1,7 +1,9 @@
 /**
  * Program: AnalyserEvent.java
  * Purpose: Handles the operation that involved in the Analyser
- * Implements: RoverObserver.java
+ *
+ * @implements RoverObserver.java
+ * @aggregate AnalyseState.java
  */
 
 package Assignment2.Observer;

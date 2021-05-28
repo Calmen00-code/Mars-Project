@@ -1,7 +1,11 @@
 /**
  * Program: RobotRover.java
  * Purpose: Act as a controller/caller to all the observers
- * Implements: RobotRoverSubject.java
+ *          Observer will not care about the details of the operation
+ *          It is just responsible to call every single observer for update
+ *          
+ * @implements RobotRoverSubject.java
+ * @aggregate Each event class will perform what the rover should be doing
  */
 
 package Assignment2.Observer;

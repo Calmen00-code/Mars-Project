@@ -3,7 +3,9 @@
  * Purpose: Handles all the operations that involved in Sensor
  *          such as reading temperature, visibility, light level,
  *          and taking photo
- * Implements: RoverObserver.java
+ *
+ * @implements RoverObserver.java
+ * @aggregate Sensors to read the data
  */
 
 package Assignment2.Observer;

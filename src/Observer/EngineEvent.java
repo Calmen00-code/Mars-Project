@@ -1,7 +1,9 @@
 /**
  * Program: EngineEvent.java
  * Purpose: Handles the event that involves in the engine of the robot
- * Implements: RoverObserver.java
+ *
+ * @implements RoverObserver.java
+ * @aggregate DriveState when the command is 'D'
  */
 
 package Assignment2.Observer;
