@@ -76,12 +76,12 @@ public class RoverDemo
                 msg = e.getMessage();
             }
             if ( rover.getCurrentState() instanceof AnalysisState ) {
+                ++sFlag;
                 if ( msg.contains("P") || msg.contains("E") )
                     System.out.println(msg);
                 else if ( msg.contains("!") )
                     System.out.println(msg);
                 else {
-                    ++sFlag;
                     if ( sFlag == 4 ) { // Wait for 4 seconds
                         byte[] data = analyser.pollAnalysis();
                         msg += "S " + Base64.getEncoder().encodeToString(data);
