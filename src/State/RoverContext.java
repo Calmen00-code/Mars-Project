@@ -7,6 +7,7 @@ package Assignment2.State;
 
 import Assignment2.API.EngineSystem;
 import Assignment2.API.SoilAnalyser;
+import Assignment2.API.Odometer;
 
 public class RoverContext
 {
@@ -15,6 +16,7 @@ public class RoverContext
     private AnalysisState isAnalyse;
     private EngineSystem engine;
     private SoilAnalyser analyser;
+    private Odometer odometer;
 /*  
     FIXME 
     private SensorOnState sensorOn;
@@ -24,11 +26,11 @@ public class RoverContext
     private RoverState roverState;
 
     public RoverContext( EngineSystem inEngine, 
-                         SoilAnalyser inAnalyser )
+                         SoilAnalyser inAnalyser, Odometer, inOdometer )
     {
         // Initialising all states to this current object
-        isDrive = new DriveState(this);
-        isIdle = new IdleState(this);
+        isDrive = new DriveState(this, inEngine, inOdometer);
+        isIdle = new IdleState(this, inEngine, inOdometer);
         isAnalyse = new AnalysisState(this);
         engine = inEngine;
         analyser = inAnalyser;
