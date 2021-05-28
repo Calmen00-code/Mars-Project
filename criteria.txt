@@ -1,0 +1,63 @@
+1. 
+
+Package: The program is splitted into four main packages which are Demo, States, Observer, API.
+
+         Demo folder will be handling the Demonstration or Simulation of the robot rover.
+         The main method is also being placed in the Demo Folder.
+
+Class:   Every class has a distinct name that represents each of their role. For example, the 
+         Odometer class in the API represents that it is the record of the distance travelled 
+         by the rover. This class will also be handling the state of Drive and Idle of the rover.
+
+Interface: Interface is implemented in the program as RoverStatee.java for the State Pattern of
+           the rover. The state pattern is used to handled the state of the rover for Drive, Idle,
+           and Analysis.
+
+           Another interface being used is in the RobotRoverSubject.java for Observer Pattern of
+           the rover. The observer pattern is used to handled the state of the rover for all 
+           operations such as drive, stop, turn, photo taking, sending report, and performing 
+           soil analysis.
+
+Method Responsibilities: 
+
+         Every method has a clear name that indicates each of its role. 
+         For example, addObserver() implies adding of a Observer into the observer pattern and
+         commandIsValid() checks the command passed in the parameter is valid or invalid.
+
+
+2.
+
+Every class will have been throwing a specific exception. For example, State Pattern may throw
+StateException when Drive is requested while the rover is performing soil analysis. Observer
+Pattern will then catch the exception thrown by the state pattern and throw its ObserverException
+to the caller. The outermost caller will then handle the exception by returning the cause of
+the exception.
+
+
+3.
+
+Dependcy Injection was done by ensuring the constructor of a class does not instantiate any 
+references. This means that all references will be instantiated by the parent caller and pass
+the references into the constructor so that the references in the class can point to the passed
+references.
+
+
+4.
+
+Use of polymorphism #1 is done by implementing the state pattern. Whenever the other class would
+like to access to a method inherited by one of the state class, the class can simply access it
+with the references of the interface which is the rover of type RoverContext. This is because 
+all the others state class was implementing this RoverContext.java.
+
+
+5.
+
+Use of polymorphism #2 is done by implementing the observer pattern. Whenever the other class
+would like access the method inherited by one of the observer class, the class can simply access
+it with the references of the interface which is the robot of type RobotRover. This is because
+all the others observer class was implementing this RoverObserver.java.
+
+
+6.
+
+UML diagram was drawn with draw.io
