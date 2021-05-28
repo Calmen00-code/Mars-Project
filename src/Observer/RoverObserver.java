@@ -6,7 +6,8 @@
 package Assignment2.Observer;
 import Assignment2.State.StateException;
 
-public interface RoverObserver
+public abstract class RoverObserver
 {
     public String runCommand(String command) throws StateException, ObserverException;
+    public double getDistance();
 }
