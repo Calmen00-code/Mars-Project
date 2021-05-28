@@ -59,7 +59,7 @@ public class RoverDemo
         // This will result in ! Invalid Command return message
         testCommand.add("Invalid");     
         
-        int i = 0;
+        int i = 0, sFlag = 1;
         while( true ) {
             try {
                 Thread.sleep(1000);
@@ -72,7 +72,15 @@ public class RoverDemo
             } catch( Exception e ) {
                 msg = e.getMessage();
             }
-            System.out.println(msg);
+            if ( rover.getCurrentState() instanceof AnalysisState ) {
+                ++sFlag;
+                if ( sFlag == 4 ) { // Wait for 4 seconds
+                    byte[] data = analyser.pollAnalysis();
+                    msg += "S " + Base64.getEncoder().encodeToString(data);
+                    sFlag = 1;      // Reset for next
+                }
+            } else
+                System.out.println(msg);
             ++i;
             if ( i == testCommand.size() ) {
                 i = 0;
