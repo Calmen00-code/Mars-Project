@@ -47,11 +47,11 @@ public class RoverDemo
         testCommand.add("D 10");
         testCommand.add("T 45");
         testCommand.add("S");
+        testCommand.add("E");
+        testCommand.add("P");
         testCommand.add("S");
         testCommand.add("D 100");
         testCommand.add("T 45");
-        testCommand.add("E");
-        testCommand.add("P");
         testCommand.add("T -181");
         testCommand.add("T 181");
         testCommand.add("T 180");
@@ -81,16 +81,14 @@ public class RoverDemo
                     System.out.println(msg);
                 else if ( msg.contains("!") )
                     System.out.println(msg);
-                else {
-                    if ( sFlag == 4 ) { // Wait for 4 seconds
-                        byte[] data = analyser.pollAnalysis();
-                        msg += "S " + Base64.getEncoder().encodeToString(data);
-                        System.out.println(msg);
-                        // Reset for next
-                        sFlag = 1;      
-                        // Reset to idle once analysis is done
-                        rover.setRoverState( rover.getIdleState() ); 
-                    }
+                if ( sFlag == 2 ) { // Wait for 2 rounds
+                    byte[] data = analyser.pollAnalysis();
+                    msg = "S " + Base64.getEncoder().encodeToString(data);
+                    System.out.println(msg);
+                    // Reset for next
+                    sFlag = 1;      
+                    // Reset to idle once analysis is done
+                    rover.setRoverState( rover.getIdleState() ); 
                 }
             } else      // Print for Drive (D), Idle, and Turn (T) states
                 System.out.println(msg);
