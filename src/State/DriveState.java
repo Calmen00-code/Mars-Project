@@ -25,7 +25,7 @@ public class DriveState implements RoverState
     }
 
     @Override
-    public String startDrive( double newDistance )
+    public String startDrive( double newDistance ) throws StateException
     {
         String feedback = "Rover is already moving... Update new distance";
 

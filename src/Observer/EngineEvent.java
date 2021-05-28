@@ -30,7 +30,7 @@ public class EngineEvent extends RoverObserver
     public String runCommand( String command ) throws ObserverException
     {
         String msg = "";
-        double parseDistance = 0.0, angle = 0.0;
+        double angle = 0.0;
 
         String[] parseCommand = command.split(" "); // Parse the command
 
@@ -40,17 +40,12 @@ public class EngineEvent extends RoverObserver
                     throw new ObserverException("! No distance given");
 
                 // Second argument must be a valid distance
-                parseDistance = Double.parseDouble(parseCommand[1]);
-                distance = parseDistance;
-                if ( rover.getCurrentState() instanceof IdleState )
-                rover.startDrive();
-
-                msg += "Drive for " + distance + "km";
+                distance = Double.parseDouble(parseCommand[1]);
+                msg = rover.startDrive( distance );
             } catch (NumberFormatException e) {
                 throw new ObserverException("! Invalid distance");
             } catch (StateException e) {
-                msg += e.getMessage();
-                throw new ObserverException(msg);
+                throw new ObserverException(e.getMessage());
             }
         } else if ( parseCommand[0].equals("T") ) { // Checking for turn
             try {
