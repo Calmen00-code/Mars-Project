@@ -65,8 +65,10 @@ public class RoverDemo
             try {
                 Thread.sleep(1000);
                 if ( !validate.commandIsValid( testCommand.get(i) ) )
-                    throw new ValidateException("Command does not exist");
+                    throw new ValidateException("! Command does not exist");
+                // It will return the current event executing by rover
                 currentEvent = robot.roverUpdate( testCommand.get(i) );
+                // Retrieve the feedback gotten from this event / operation
                 msg = robot.getEventMsg();
             } catch ( InterruptedException e ) {
                 /* Do nothing */
@@ -75,6 +77,8 @@ public class RoverDemo
             }
             if ( rover.getCurrentState() instanceof AnalysisState ) {
                 if ( msg.contains("P") || msg.contains("E") )
+                    System.out.println(msg);
+                else if ( msg.contains("!") )
                     System.out.println(msg);
                 else {
                     ++sFlag;
@@ -88,7 +92,7 @@ public class RoverDemo
                         rover.setRoverState( rover.getIdleState() ); 
                     }
                 }
-            } else
+            } else      // Print for Drive (D), Idle, and Turn (T) states
                 System.out.println(msg);
             ++i;
             if ( i == testCommand.size() ) {
