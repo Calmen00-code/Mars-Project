@@ -13,6 +13,7 @@ import Assignment2.DemoTest.*;
 
 public class RoverDemo
 {
+    @SuppressWarnings("unchecked")
     public static void main(String[] args)    
     {
         List<String> testCommand = new ArrayList();
@@ -46,13 +47,13 @@ public class RoverDemo
         robot.addObserver( engineEvent );
         robot.addObserver( analyserEvent );
 
-        testCommand.add("D 10");
+        testCommand.add("D 2");
         testCommand.add("T 45");
         testCommand.add("S");
         testCommand.add("E");
         testCommand.add("P");
         testCommand.add("S");
-        testCommand.add("D 100");
+        testCommand.add("D 9");
         testCommand.add("T 45");
         testCommand.add("T -181");
         testCommand.add("T 181");
@@ -62,6 +63,7 @@ public class RoverDemo
         testCommand.add("Invalid");     
         
         int i = 0, sFlag = 1;
+        double distCounter = 0;
         RoverObserver currentEvent = null;
         while( true ) {
             try {
@@ -77,13 +79,19 @@ public class RoverDemo
             } catch( Exception e ) {
                 msg = e.getMessage();
             }
+
+            /**
+             * P and E can still be running while rover is in Analysis
+             * sFlag is a flag to allow the S to take sometimes before
+             * the result is ready
+             */
             if ( rover.getCurrentState() instanceof AnalysisState ) {
                 ++sFlag;
                 if ( msg.contains("P") || msg.contains("E") )
                     System.out.println(msg);
                 else if ( msg.contains("!") )
                     System.out.println(msg);
-                if ( sFlag == 2 ) { // Wait for 2 rounds
+                if ( sFlag == 2 ) { // Wait for 2 rounds for analysis
                     byte[] data = analyser.pollAnalysis();
                     msg = "S " + Base64.getEncoder().encodeToString(data);
                     System.out.println(msg);
@@ -94,11 +102,26 @@ public class RoverDemo
                 }
             } else      // Print for Drive (D), Idle, and Turn (T) states
                 System.out.println(msg);
+
+            /** 
+             * Increment of the command here to check for the next command
+             * In actual, the program will call pollCommand and retrieve the
+             * next available command from Earth.
+             **/
             ++i;
-            if ( i == testCommand.size() ) {
-                i = 0;
-                // TODO Implement the checking for getDistanceDriven()
-                engine.setDistance(0);  
+            if ( i == testCommand.size() ) {    
+                i = 0;  // Reset to allow circular rotation
+            }
+
+            /**
+             * Controlling the total distance that a rover had travelled
+             * Rover is not moving when State is Idle and Analysis
+             */
+            if ( rover.getCurrentState() instanceof DriveState )
+                ++distCounter;
+            
+            if ( engine.getDistanceDriven() - odometer.getFinalDistance() 
+                 <= odometer.getInitialDistance() ) {
                 System.out.println("D " + engineEvent.getDistance());
             }
         }

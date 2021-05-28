@@ -7,7 +7,7 @@ package Assignment2.State;
 
 public interface RoverState
 {
-    public String startDrive() throws StateException;
+    public String startDrive( double newDistance ) throws StateException;
     public String stopDrive();
     public String startAnalyse() throws StateException;
 }

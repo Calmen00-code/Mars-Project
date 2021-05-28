@@ -17,7 +17,7 @@ public class AnalysisState implements RoverState
     }
 
     @Override
-    public String startDrive() throws StateException
+    public String startDrive( double newDistance ) throws StateException
     {
         throw new StateException(
                 "! Rover cannot move while performing soil analysis");

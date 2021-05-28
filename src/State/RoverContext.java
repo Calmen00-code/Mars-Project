@@ -26,11 +26,12 @@ public class RoverContext
     private RoverState roverState;
 
     public RoverContext( EngineSystem inEngine, 
-                         SoilAnalyser inAnalyser, Odometer, inOdometer )
+                         SoilAnalyser inAnalyser, Odometer inOdometer )
     {
         // Initialising all states to this current object
-        isDrive = new DriveState(this, inEngine, inOdometer);
-        isIdle = new IdleState(this, inEngine, inOdometer);
+        odometer = inOdometer;
+        isDrive = new DriveState(this, inEngine, odometer);
+        isIdle = new IdleState(this, inEngine, odometer);
         isAnalyse = new AnalysisState(this);
         engine = inEngine;
         analyser = inAnalyser;
@@ -52,10 +53,10 @@ public class RoverContext
         roverState = newRoverState;
     }
 
-    public String startDrive() throws StateException
+    public String startDrive( double distance ) throws StateException
     {
         String feedback = "";
-        feedback = roverState.startDrive();    // State Transition
+        feedback = roverState.startDrive( distance );    // State Transition
         engine.startDriving();                 // Actual stop
         return feedback;
     }

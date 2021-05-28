@@ -31,5 +31,5 @@ public class EngineSystem
      * landed on Mars. This figure is never reset. It remains constant while the 
      * rover is stopped, and increases while the rover is driving. 
      */     
-    public double getDistanceDriven() { return 100; }
+    public double getDistanceDriven() { return 10; }
 }
