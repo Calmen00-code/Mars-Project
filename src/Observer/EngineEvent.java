@@ -7,7 +7,7 @@
 package Assignment2.Observer;
 
 import Assignment2.API.EngineSystem;
-import Assignment2.State.RoverContext;
+import Assignment2.API.Odometer;
 import Assignment2.State.*;
 
 public class EngineEvent extends RoverObserver
@@ -40,8 +40,9 @@ public class EngineEvent extends RoverObserver
                 // Second argument must be a valid distance
                 parseDistance = Double.parseDouble(parseCommand[1]);
                 distance = parseDistance;
+                if ( rover.getCurrentState() instanceof IdleState )
                 rover.startDrive();
-                
+
                 msg += "Drive for " + distance + "km";
             } catch (NumberFormatException e) {
                 throw new ObserverException("! Invalid distance");
