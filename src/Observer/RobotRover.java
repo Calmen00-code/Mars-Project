@@ -27,9 +27,10 @@ public class RobotRover implements RobotRoverSubject
     public void removeObserver( RoverObserver o ) { roverObservers.remove(o); }
 
     @Override
-    public void roverUpdate( String command ) throws ObserverException
+    public RoverObserver roverUpdate( String command ) throws ObserverException
     {
         String tmpMsg = "";
+        RoverObserver currentEvent = null;
 
         // Appending every event message returned by each observers
         for ( RoverObserver ob : roverObservers ) {
@@ -43,9 +44,12 @@ public class RobotRover implements RobotRoverSubject
             eventMsg = tmpMsg;
 
             // Found the correct operation when tmpMsg is no longer empty
-            if ( !tmpMsg.equals("") )
+            if ( !tmpMsg.equals("") ) {
+                currentEvent = ob;
                 break;
+            }
         }
+        return currentEvent;
     }
 
     public String getEventMsg() { return eventMsg; }

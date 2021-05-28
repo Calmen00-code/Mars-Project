@@ -60,25 +60,30 @@ public class RoverDemo
         testCommand.add("Invalid");     
         
         int i = 0, sFlag = 1;
+        RoverObserver currentEvent = null;
         while( true ) {
             try {
                 Thread.sleep(1000);
                 if ( !validate.commandIsValid( testCommand.get(i) ) )
                     throw new ValidateException("Command does not exist");
-                robot.roverUpdate( testCommand.get(i) );
+                currentEvent = robot.roverUpdate( testCommand.get(i) );
                 msg = robot.getEventMsg();
             } catch ( InterruptedException e ) {
                 /* Do nothing */
             } catch( Exception e ) {
                 msg = e.getMessage();
             }
-            if ( rover.getCurrentState() instanceof AnalysisState ) {
+            if ( rover.getCurrentState() instanceof AnalysisState &&
+                 currentEvent instanceof AnalyserEvent && !msg.contains("!") ) {
                 ++sFlag;
                 if ( sFlag == 4 ) { // Wait for 4 seconds
                     byte[] data = analyser.pollAnalysis();
-                    msg += "S " + Base64.getEncoder().encodeToString(data) + "\n";
+                    msg += "S " + Base64.getEncoder().encodeToString(data);
                     System.out.println(msg);
-                    sFlag = 1;      // Reset for next
+                    // Reset for next
+                    sFlag = 1;      
+                    // Reset to idle once analysis is done
+                    rover.setRoverState( rover.getIdleState() ); 
                 }
             } else
                 System.out.println(msg);

@@ -6,9 +6,11 @@
 
 package Assignment2.Observer;
 
+import Assignment2.Observer.RoverObserver;
+
 public interface RobotRoverSubject
 {
     public void addObserver(RoverObserver o);
     public void removeObserver(RoverObserver o);
-    public void roverUpdate(String command) throws ObserverException;
+    public RoverObserver roverUpdate(String command) throws ObserverException;
 }
