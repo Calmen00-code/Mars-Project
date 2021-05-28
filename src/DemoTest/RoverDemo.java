@@ -77,6 +77,7 @@ public class RoverDemo
                 if ( sFlag == 4 ) { // Wait for 4 seconds
                     byte[] data = analyser.pollAnalysis();
                     msg += "S " + Base64.getEncoder().encodeToString(data);
+                    System.out.println(msg);
                     sFlag = 1;      // Reset for next
                 }
             } else
