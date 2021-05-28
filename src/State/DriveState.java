@@ -7,23 +7,29 @@
 package Assignment2.State;
 
 import Assignment2.API.EngineSystem;
+import Assignment2.API.Odometer;
 
 public class DriveState implements RoverState
 {
     private RoverContext rover;
+    private EngineSystem engine;
+    private Odometer odometer;
+ 
 
-    public DriveState( RoverContext inRoverContext )
+    public DriveState( RoverContext inRoverContext, 
+                       EngineSystem inEngine, Odometer inOdometer )
     {
         rover = inRoverContext;
+        engine = inEngine;
+        odometer = inOdometer
     }
 
     @Override
     public String startDrive() throws StateException
     {
         String feedback = "Rover is already moving... Update new distance";
-        EngineSystem engine = rover.getEngine();
 
-        if ( engine.getDistanceDriven() <= 0 ) {
+        if ( engine.getDistanceDriven() - <=  ) {
             rover.setRoverState( rover.getIdleState() );
             throw new StateException("! Rover had already reached its destination");
         }
