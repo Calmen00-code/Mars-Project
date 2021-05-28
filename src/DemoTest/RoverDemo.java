@@ -73,17 +73,20 @@ public class RoverDemo
             } catch( Exception e ) {
                 msg = e.getMessage();
             }
-            if ( rover.getCurrentState() instanceof AnalysisState &&
-                 currentEvent instanceof AnalyserEvent && !msg.contains("!") ) {
-                ++sFlag;
-                if ( sFlag == 4 ) { // Wait for 4 seconds
-                    byte[] data = analyser.pollAnalysis();
-                    msg += "S " + Base64.getEncoder().encodeToString(data);
+            if ( rover.getCurrentState() instanceof AnalysisState ) {
+                if ( msg.contains("P") || msg.contains("E") )
                     System.out.println(msg);
-                    // Reset for next
-                    sFlag = 1;      
-                    // Reset to idle once analysis is done
-                    rover.setRoverState( rover.getIdleState() ); 
+                else {
+                    ++sFlag;
+                    if ( sFlag == 4 ) { // Wait for 4 seconds
+                        byte[] data = analyser.pollAnalysis();
+                        msg += "S " + Base64.getEncoder().encodeToString(data);
+                        System.out.println(msg);
+                        // Reset for next
+                        sFlag = 1;      
+                        // Reset to idle once analysis is done
+                        rover.setRoverState( rover.getIdleState() ); 
+                    }
                 }
             } else
                 System.out.println(msg);
