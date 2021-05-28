@@ -27,10 +27,12 @@ public class RoverDemo
         RobotRover robot;
         HashSet<RoverObserver> roverObs;
         ValidateCommand validate;
+        Odometer odometer;
         
         engine = new EngineSystem();
         analyser = new SoilAnalyser();
-        rover = new RoverContext( engine, analyser );
+        odometer = new Odometer();
+        rover = new RoverContext( engine, analyser, odometer );
         analyserEvent = new AnalyserEvent( analyser, rover );
         engineEvent = new EngineEvent( engine, rover );
         sensor = new Sensors();
