@@ -57,7 +57,7 @@ public class EngineEvent extends RoverObserver
                     throw new ObserverException("! Cannot turn when rover is performing analysis");
 
                 if ( angle >= -180 && angle <= 180 )
-                    msg += "Rover turn for " + angle + " degree";
+                    msg += "T " + angle;
                 else
                     throw new ObserverException("! Invalid angle");
             } catch (NumberFormatException e) {
