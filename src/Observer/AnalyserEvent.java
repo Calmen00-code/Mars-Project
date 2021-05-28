@@ -9,7 +9,7 @@ package Assignment2.Observer;
 import Assignment2.API.SoilAnalyser;
 import Assignment2.State.StateException;
 import Assignment2.State.RoverContext;
-import java.util.Base64;
+import java.util.*;
 
 public class AnalyserEvent extends RoverObserver
 {
@@ -30,7 +30,8 @@ public class AnalyserEvent extends RoverObserver
         if ( command.equals("S") ) {
             rover.startAnalyse();
             analyser.startAnalysis();
-
+            try { Thread.sleep(4000); } 
+            catch ( InterruptedException e ) { /* Do Nothing */ }
             byte[] data = analyser.pollAnalysis();
             msg += "S " + Base64.getEncoder().encodeToString(data);
         }
