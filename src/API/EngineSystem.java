@@ -2,8 +2,6 @@ package Assignment2.API;
 
 public class EngineSystem
 {
-    private double distance = 1.0;
-
     /** 
      * Begins driving forward. The effect is *not* to drive a fixed distance, but 
      * to simply start driving. The rover will not stop until the stopDriving() 
@@ -33,10 +31,5 @@ public class EngineSystem
      * landed on Mars. This figure is never reset. It remains constant while the 
      * rover is stopped, and increases while the rover is driving. 
      */     
-    public double getDistanceDriven() { return distance; }
-
-    public void setDistance( double val )
-    {
-        distance = val;
-    }
+    public double getDistanceDriven() { return 0; }
 }
