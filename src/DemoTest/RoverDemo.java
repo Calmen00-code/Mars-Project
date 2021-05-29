@@ -112,11 +112,13 @@ public class RoverDemo
                 i = 0;  // Reset to allow circular rotation
             }
  
+/*
             if ( engine.getDistanceDriven() - odometer.getFinalDistance() 
                  <= odometer.getInitialDistance() ) {
                 System.out.println("D " + engineEvent.getDistance());
                 rover.setRoverState( rover.getIdleState() );
             }
+*/
         }
     }
 }
