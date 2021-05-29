@@ -63,6 +63,7 @@ public class RoverDemo
         testCommand.add("Invalid");     
         
         int i = 0, sFlag = 1;
+        double distCounter = 0.0;
         RoverObserver currentEvent = null;
         while( true ) {
             try {
@@ -111,14 +112,19 @@ public class RoverDemo
             if ( i == testCommand.size() ) {    
                 i = 0;  // Reset to allow circular rotation
             }
+
+            /**
+             * Controlling the total distance that a rover had travelled
+             * Rover is not moving when State is Idle and Analysis
+             */
+            if ( rover.getCurrentState() instanceof DriveState )
+                ++distCounter;
  
-/*
-            if ( engine.getDistanceDriven() - odometer.getFinalDistance() 
+            if ( engine.getDistanceDriven() - distCounter
                  <= odometer.getInitialDistance() ) {
                 System.out.println("D " + engineEvent.getDistance());
                 rover.setRoverState( rover.getIdleState() );
             }
-*/
         }
     }
 }
