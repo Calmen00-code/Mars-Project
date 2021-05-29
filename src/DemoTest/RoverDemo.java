@@ -62,7 +62,7 @@ public class RoverDemo
         // This will result in ! Invalid Command return message
         testCommand.add("Invalid");     
         
-        int i = 0, sFlag = 1;
+        int i = 0, sFlag = 0;
         double distCounter = 0.0;
         RoverObserver currentEvent = null;
         while( true ) {
@@ -91,7 +91,7 @@ public class RoverDemo
                     System.out.println(msg);
                 else if ( msg.contains("!") )
                     System.out.println(msg);
-                if ( sFlag == 2 ) { // Wait for 2 rounds for analysis
+                if ( sFlag == 4 ) { // Wait for 4 rounds for analysis
                     byte[] data = analyser.pollAnalysis();
                     msg = "S " + Base64.getEncoder().encodeToString(data);
                     System.out.println(msg);
@@ -120,8 +120,8 @@ public class RoverDemo
             if ( rover.getCurrentState() instanceof DriveState )
                 ++distCounter;
  
-            if ( engine.getDistanceDriven() - distCounter
-                 <= odometer.getInitialDistance() ) {
+            if ( engine.getDistanceDriven() - distCounter <= odometer.getInitialDistance() && 
+                 rover.getCurrentState() instanceof DriveState ) {
                 System.out.println("D " + engineEvent.getDistance());
                 rover.setRoverState( rover.getIdleState() );
             }
