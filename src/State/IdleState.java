@@ -26,16 +26,19 @@ public class IdleState implements RoverState
     @Override
     public String startDrive( double newDistance ) throws StateException
     {
-        String feedback = "Rover starting to move";
+        String feedback = ""; 
 
         // Check if rover reached its destitation 
         if ( engine.getDistanceDriven() - odometer.getFinalDistance() 
              <= odometer.getInitialDistance() ) {
             rover.setRoverState( rover.getIdleState() );
-            throw new StateException( "Rover had reached its destination" );
+            feedback = "D " + odometer.getFinalDistance();
+            // throw new StateException( "Rover had reached its destination" );
         }
-        else    // Otherwise, start driving or overwrite the old distance
+        else {   // Otherwise, start driving
             rover.setRoverState( rover.getDriveState() );
+            feedback = "Rover starting to move";
+        }
         return feedback;
     }
 
