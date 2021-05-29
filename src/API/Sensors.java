@@ -6,7 +6,7 @@ public class Sensors
     public double readTemperature() { return -15.8; }
 
     /** Performs a visibility reading and returns the result in km. */
-    public double readVisibility() { return 7.1; }
+    public double readVisibility() { return 4.5; }
 
     /** Performs a light-level reading, and returns the result in lux (units). */
     public double readLightLevel() { return 13774; }

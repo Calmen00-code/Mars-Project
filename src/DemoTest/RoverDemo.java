@@ -13,6 +13,9 @@ import Assignment2.DemoTest.*;
 
 public class RoverDemo
 {
+    public static final double VISIBILITY_LOWER = 4.0;
+    public static final double VISIBILITY_UPPER = 5.0;
+
     @SuppressWarnings("unchecked")
     public static void main(String[] args)    
     {
@@ -120,10 +123,18 @@ public class RoverDemo
             if ( rover.getCurrentState() instanceof DriveState )
                 ++distCounter;
  
+            // Check if the rover has reached the destination
             if ( engine.getDistanceDriven() - distCounter <= odometer.getInitialDistance() && 
                  rover.getCurrentState() instanceof DriveState ) {
                 System.out.println("D " + engineEvent.getDistance());
                 rover.setRoverState( rover.getIdleState() );
+            }
+
+            // Check if there is automated message needed to be displayed
+            if ( sensor.readVisibility() >= VISIBILITY_LOWER && 
+                 sensor.readVisibility() <= VISIBILITY_UPPER ) {
+                System.out.println("Auto E " + sensor.readTemperature() + " " + 
+                                   sensor.readVisibility() + " " + sensor.readLightLevel() );
             }
         }
     }
